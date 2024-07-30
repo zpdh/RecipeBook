@@ -5,21 +5,47 @@
     <projectFile profileName="http">src/Backend/RecipeBook.API/RecipeBook.API.csproj</projectFile>
     <projectFile profileName="https">src/Backend/RecipeBook.API/RecipeBook.API.csproj</projectFile>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a896c532-b2ef-4783-8528-2c1d36a3a205" name="Changes" comment="feat: adding user registration endpoint" />
+    <list default="true" id="a896c532-b2ef-4783-8528-2c1d36a3a205" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RecipeBook/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RecipeBook/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.API/RecipeBook.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/RecipeBook.API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.API/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/RecipeBook.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/RecipeBook.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/RecipeBook.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/RecipeBook.Infrastructure.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="autoShow" value="false" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Code/RecipeBook/src/Backend/RecipeBook.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/RecipeBook/src/Backend/RecipeBook.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/RecipeBook/src/Backend/RecipeBook.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Code/RecipeBook/src/Backend/RecipeBook.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2jrkQiwkWbiuJNGyeLZW7lI2smD" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -33,7 +59,7 @@
     ".NET Launch Settings Profile.RecipeBook.API: IIS Express.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/register-user-endpoint",
+    "git-widget-placeholder": "feature/add-user-entity",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -105,7 +131,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1722152569246</updated>
-      <workItem from="1722152570540" duration="359000" />
+      <workItem from="1722152570540" duration="7547000" />
+      <workItem from="1722191223974" duration="4228000" />
+      <workItem from="1722285830905" duration="6741000" />
+      <workItem from="1722299753396" duration="3961000" />
     </task>
     <task id="LOCAL-00001" summary="feat: adding user registration endpoint">
       <option name="closed" value="true" />
@@ -127,5 +156,24 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="feat: adding user registration endpoint" />
     <option name="LAST_COMMIT_MESSAGE" value="feat: adding user registration endpoint" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/src/Backend/RecipeBook.API/Middleware/CultureMiddleware.cs</url>
+          <line>26</line>
+          <properties documentPath="C:\Code\RecipeBook\src\Backend\RecipeBook.API\Middleware\CultureMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
+            <startOffsets>
+              <option value="719" />
+            </startOffsets>
+            <endOffsets>
+              <option value="760" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
