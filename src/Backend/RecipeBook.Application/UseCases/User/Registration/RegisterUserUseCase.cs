@@ -44,7 +44,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
         return new RegisterUserResponseJson
         {
-            Name = request.Name
+            Name = user.Name
         };
     }
 
