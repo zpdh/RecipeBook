@@ -4,6 +4,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using MySqlConnector;
 using RecipeBook.Domain.Enums;
+using RecipeBook.Domain.Extensions;
 
 namespace RecipeBook.Infrastructure.Migrations;
 
@@ -33,7 +34,7 @@ public class DatabaseMigration
             "SELECT * FROM INFORMATION_SCHEMA.SCHEMATA " +
             "WHERE SCHEMA_NAME = @dbname", parameters);
 
-        if (!records.Any()) dbConnection.Execute(sql: $"CREATE DATABASE {databaseName}");
+        if (records.Any().IsFalse()) dbConnection.Execute(sql: $"CREATE DATABASE {databaseName}");
     }
 
     private static void EnsureDatabaseCreationSqlServer(string connectionString)
@@ -52,7 +53,7 @@ public class DatabaseMigration
             "SELECT * FROM sys.databases " +
             "WHERE NAME = @dbname", parameters);
 
-        if (!records.Any()) dbConnection.Execute(sql: $"CREATE DATABASE {databaseName}");
+        if (records.Any().IsFalse()) dbConnection.Execute(sql: $"CREATE DATABASE {databaseName}");
     }
 
     private static void MigrateDatabase(IServiceProvider serviceProvider)

@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using RecipeBook.Application.Services.Cryptography;
 using RecipeBook.Communication.Requests;
 using RecipeBook.Communication.Responses;
+using RecipeBook.Domain.Extensions;
 using RecipeBook.Domain.Repositories;
 using RecipeBook.Domain.Repositories.User;
 using RecipeBook.Exceptions;
@@ -60,7 +61,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
             result.Errors.Add(new ValidationFailure(string.Empty, ResourceMessageExceptions.EMAIL_EXISTS));
         }
 
-        if (!result.IsValid)
+        if (result.IsValid.IsFalse())
         {
             var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
 

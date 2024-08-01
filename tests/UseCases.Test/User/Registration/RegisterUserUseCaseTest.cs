@@ -63,7 +63,7 @@ public class RegisterUserUseCaseTest
                 e.ErrorMessages.Contains(ResourceMessageExceptions.NAME_EMPTY));
     }
 
-    private RegisterUserUseCase InstanceUseCase(string? email = null)
+    private static RegisterUserUseCase InstanceUseCase(string? email = null)
     {
         var encrypter = PasswordEncrypterBuilder.Build();
         var mapper = MapperBuilder.Build();
