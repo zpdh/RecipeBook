@@ -8,7 +8,7 @@ using RecipeBook.Domain.Extensions;
 
 namespace RecipeBook.Infrastructure.Migrations;
 
-public class DatabaseMigration
+public static class DatabaseMigration
 {
     public static void Migrate(DatabaseType databaseType, string connectionString, IServiceProvider serviceProvider)
     {
