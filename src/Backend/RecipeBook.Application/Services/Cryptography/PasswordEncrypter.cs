@@ -6,7 +6,7 @@ namespace RecipeBook.Application.Services.Cryptography;
 public class PasswordEncrypter
 {
     private readonly string PassKey;
-    public PasswordEncrypter(string passKey)
+    public PasswordEncrypter(string passKey = "123")
     {
         PassKey = passKey;
     }
