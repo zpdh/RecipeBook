@@ -38,7 +38,7 @@ app.MapControllers();
 
 MigrateDatabase();
 
-app.Run();
+await app.RunAsync();
 
 void MigrateDatabase()
 {
@@ -46,7 +46,7 @@ void MigrateDatabase()
     {
         return;
     }
-    
+
     var databaseType = builder.Configuration.DatabaseType();
     var connectionString = builder.Configuration.ConnectionString();
 
@@ -56,4 +56,7 @@ void MigrateDatabase()
 
 public partial class Program
 {
+    protected Program()
+    {
+    }
 }
