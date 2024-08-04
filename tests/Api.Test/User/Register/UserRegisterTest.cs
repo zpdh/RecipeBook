@@ -9,13 +9,12 @@ using RecipeBook.Exceptions;
 
 namespace Api.Test.User.Register;
 
-public class UserRegisterTest : IClassFixture<CustomWebApplicationFactory>
+public class UserRegisterTest : RecipeBookClassFixture
 {
-    private readonly HttpClient _httpClient;
+    private const string Endpoint = "user";
 
-    public UserRegisterTest(CustomWebApplicationFactory factory)
+    public UserRegisterTest(CustomWebApplicationFactory factory) : base(factory)
     {
-        _httpClient = factory.CreateClient();
     }
 
     [Fact]
@@ -23,10 +22,10 @@ public class UserRegisterTest : IClassFixture<CustomWebApplicationFactory>
     {
         var request = RegisterUserRequestJsonBuilder.Build();
 
-        var response = await _httpClient.PostAsJsonAsync("User", request);
+        var response = await Post(Endpoint, request);
 
         response.StatusCode.Should().Be(HttpStatusCode.Created);
-        
+
         await using var responseBody = await response.Content.ReadAsStreamAsync();
 
         var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -34,21 +33,15 @@ public class UserRegisterTest : IClassFixture<CustomWebApplicationFactory>
         responseData.RootElement.GetProperty("name").GetString()
             .Should().NotBeNullOrWhiteSpace().And.Be(request.Name);
     }
-    
+
     [Theory]
     [ClassData(typeof(CultureInlineDataTests))]
     public async Task EmptyNameError(string culture)
     {
         var request = RegisterUserRequestJsonBuilder.Build();
         request.Name = string.Empty;
-
-        if (_httpClient.DefaultRequestHeaders.Contains("Accept-Language"))
-        {
-            _httpClient.DefaultRequestHeaders.Remove("Accept-Language");
-        }
         
-        _httpClient.DefaultRequestHeaders.Add("Accept-Language", culture);
-        var response = await _httpClient.PostAsJsonAsync("User", request);
+        var response = await Post(Endpoint, request, culture);
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
