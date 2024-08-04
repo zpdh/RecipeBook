@@ -4,7 +4,7 @@ public class ErrorOnValidationException : RecipeBookException
 {
     public IList<string> ErrorMessages { get; set; }
 
-    public ErrorOnValidationException(IList<string> errorMessages)
+    public ErrorOnValidationException(IList<string> errorMessages) : base(string.Empty)
     {
         ErrorMessages = errorMessages;
     }
