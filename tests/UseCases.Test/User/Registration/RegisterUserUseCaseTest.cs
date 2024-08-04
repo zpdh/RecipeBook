@@ -32,7 +32,7 @@ public class RegisterUserUseCaseTest
 
         var useCase = InstanceUseCase(request.Email);
 
-        Func<Task> act = async () => await useCase.Execute(request);
+        var act = async () => await useCase.Execute(request);
 
         (await act.Should().ThrowAsync<ErrorOnValidationException>())
             .Where(e =>
