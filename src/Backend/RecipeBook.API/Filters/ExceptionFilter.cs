@@ -23,14 +23,17 @@ public class ExceptionFilter : IExceptionFilter
 
     private static void HandleException(ExceptionContext context)
     {
-        if (context.Exception is ErrorOnValidationException exception)
+        switch (context.Exception)
         {
-            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            context.Result = new BadRequestObjectResult(new ErrorResponseJson(exception.ErrorMessages));
-        }
-        else
-        {
-            ThrowUnknownException(context);
+            case ErrorOnValidationException e:
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                context.Result = new BadRequestObjectResult(new ErrorResponseJson(e.ErrorMessages));
+                break;
+
+            case InvalidLoginException e:
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                context.Result = new UnauthorizedObjectResult(new ErrorResponseJson(e.Message));
+                break;
         }
     }
 
