@@ -2,6 +2,7 @@ using RecipeBook.Application.Services.Cryptography;
 using RecipeBook.Communication.Requests;
 using RecipeBook.Communication.Responses;
 using RecipeBook.Domain.Repositories.User;
+using RecipeBook.Domain.Security.Tokens;
 using RecipeBook.Exceptions.ExceptionsBase;
 
 namespace RecipeBook.Application.UseCases.Login.ExecuteLogin;
@@ -10,11 +11,16 @@ public class ExecuteLoginUseCase : IExecuteLoginUseCase
 {
     private readonly IUserReadOnlyRepository _readOnlyRepository;
     private readonly PasswordEncrypter _encrypter;
+    private readonly IAccessTokenGenerator _tokenGenerator;
 
-    public ExecuteLoginUseCase(IUserReadOnlyRepository readOnlyRepository, PasswordEncrypter encrypter)
+    public ExecuteLoginUseCase(
+        IUserReadOnlyRepository readOnlyRepository,
+        PasswordEncrypter encrypter,
+        IAccessTokenGenerator tokenGenerator)
     {
         _readOnlyRepository = readOnlyRepository;
         _encrypter = encrypter;
+        _tokenGenerator = tokenGenerator;
     }
 
     public async Task<RegisterUserResponseJson> Execute(LoginRequestJson request)
@@ -33,7 +39,11 @@ public class ExecuteLoginUseCase : IExecuteLoginUseCase
 
         return new RegisterUserResponseJson
         {
-            Name = user.Name
+            Name = user.Name,
+            Tokens = new ResponseTokenJson
+            {
+                AccessToken = _tokenGenerator.Generate(user.UserIdentifier)
+            }
         };
     }
 }

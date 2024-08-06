@@ -138,4 +138,10 @@
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>An unknown error occurred.</value>
   </data>
+  <data name="NO_TOKEN" xml:space="preserve">
+    <value>No authorization token was found.</value>
+  </data>
+  <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
+    <value>The provided user does not have permission to access this resource.</value>
+  </data>
 </root>

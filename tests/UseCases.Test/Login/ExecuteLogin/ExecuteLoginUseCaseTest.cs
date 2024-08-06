@@ -1,6 +1,7 @@
 using CommonTestUtils.Entities;
 using CommonTestUtils.Repositories;
 using CommonTestUtils.Requests;
+using CommonTestUtils.Tokens;
 using FluentAssertions;
 using RecipeBook.Application.Services.Cryptography;
 using RecipeBook.Application.UseCases.Login.ExecuteLogin;
@@ -26,8 +27,10 @@ public class ExecuteLoginUseCaseTest
         });
 
         result.Should().NotBeNull();
-
+        result.Tokens.Should().NotBeNull();
+        
         result.Name.Should().NotBeNullOrWhiteSpace().And.Be(user.Name);
+        result.Tokens.AccessToken.Should().NotBeNullOrWhiteSpace();
     }
 
     [Fact]
@@ -47,12 +50,13 @@ public class ExecuteLoginUseCaseTest
     private static ExecuteLoginUseCase InstanceUseCase(RecipeBook.Domain.Entities.User? user = null)
     {
         var readRepoBuilder = new UserReadOnlyRepositoryBuilder();
+        var tokenGenerator = JwtTokenGeneratorBuilder.Build();
 
         if (user is not null)
         {
             readRepoBuilder.GetByEmailAndPassword(user);
         }
 
-        return new ExecuteLoginUseCase(readRepoBuilder.Build(), new PasswordEncrypter());
+        return new ExecuteLoginUseCase(readRepoBuilder.Build(), new PasswordEncrypter(), tokenGenerator);
     }
 }

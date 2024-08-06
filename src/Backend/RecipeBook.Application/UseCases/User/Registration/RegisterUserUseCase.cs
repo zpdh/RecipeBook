@@ -6,6 +6,7 @@ using RecipeBook.Communication.Responses;
 using RecipeBook.Domain.Extensions;
 using RecipeBook.Domain.Repositories;
 using RecipeBook.Domain.Repositories.User;
+using RecipeBook.Domain.Security.Tokens;
 using RecipeBook.Exceptions;
 using RecipeBook.Exceptions.ExceptionsBase;
 
@@ -18,18 +19,21 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly PasswordEncrypter _encrypter;
+    private readonly IAccessTokenGenerator _tokenGenerator;
 
     public RegisterUserUseCase(
         IUserWriteOnlyRepository writeOnlyRepository,
         IUserReadOnlyRepository readOnlyRepository,
         IMapper mapper,
         IUnitOfWork unitOfWork,
-        PasswordEncrypter encrypter)
+        PasswordEncrypter encrypter,
+        IAccessTokenGenerator tokenGenerator)
     {
         _writeOnlyRepository = writeOnlyRepository;
         _readOnlyRepository = readOnlyRepository;
         _mapper = mapper;
         _encrypter = encrypter;
+        _tokenGenerator = tokenGenerator;
         _unitOfWork = unitOfWork;
     }
 
@@ -39,13 +43,18 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
         var user = _mapper.Map<Domain.Entities.User>(request);
         user.Password = _encrypter.Encrypt(request.Password);
+        user.UserIdentifier = Guid.NewGuid();
 
         await _writeOnlyRepository.Add(user);
         await _unitOfWork.Commit();
 
         return new RegisterUserResponseJson
         {
-            Name = user.Name
+            Name = user.Name,
+            Tokens = new ResponseTokenJson
+            {
+                AccessToken = _tokenGenerator.Generate(user.UserIdentifier)
+            }
         };
     }
 

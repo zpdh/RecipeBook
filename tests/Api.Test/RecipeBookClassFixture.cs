@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Http;
 
@@ -18,6 +19,14 @@ public class RecipeBookClassFixture : IClassFixture<CustomWebApplicationFactory>
         
         return await _httpClient.PostAsJsonAsync(endpoint, request);
     }
+    
+    protected async Task<HttpResponseMessage> Get(string endpoint, string token = "", string culture = "en")
+    {
+        ChangeCulture(culture);
+        AuthorizeRequest(token);
+        
+        return await _httpClient.GetAsync(endpoint);
+    }
 
     private void ChangeCulture(string culture)
     {
@@ -27,5 +36,12 @@ public class RecipeBookClassFixture : IClassFixture<CustomWebApplicationFactory>
         }
 
         _httpClient.DefaultRequestHeaders.Add("Accept-Language", culture);
+    }
+
+    private void AuthorizeRequest(string token)
+    {
+        if (string.IsNullOrWhiteSpace(token)) return;
+
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
 }
