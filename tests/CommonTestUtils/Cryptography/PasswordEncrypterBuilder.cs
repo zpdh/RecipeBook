@@ -1,8 +1,12 @@
-using RecipeBook.Application.Services.Cryptography;
+using RecipeBook.Domain.Security.Cryptography;
+using RecipeBook.Infrastructure.Security.Cryptography;
 
 namespace CommonTestUtils.Cryptography;
 
 public class PasswordEncrypterBuilder
 {
-    public static PasswordEncrypter Build() => new PasswordEncrypter();
+    public static IPasswordEncrypter Build()
+    {
+        return new Sha512Encrypter();
+    }
 }
