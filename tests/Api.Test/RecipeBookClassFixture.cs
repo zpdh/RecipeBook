@@ -1,31 +1,50 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Http;
+using RecipeBook.Communication.Requests;
 
 namespace Api.Test;
 
 public class RecipeBookClassFixture : IClassFixture<CustomWebApplicationFactory>
 {
     private readonly HttpClient _httpClient;
-    
+
     protected RecipeBookClassFixture(CustomWebApplicationFactory factory)
     {
         _httpClient = factory.CreateClient();
     }
 
-    protected async Task<HttpResponseMessage> Post<T>(string endpoint, T request, string culture = "en")
+    protected async Task<HttpResponseMessage> Post<T>(
+        string endpoint,
+        T request,
+        string culture = "en")
     {
         ChangeCulture(culture);
-        
+
         return await _httpClient.PostAsJsonAsync(endpoint, request);
     }
-    
-    protected async Task<HttpResponseMessage> Get(string endpoint, string token = "", string culture = "en")
+
+    protected async Task<HttpResponseMessage> Get(
+        string endpoint,
+        string token = "",
+        string culture = "en")
     {
         ChangeCulture(culture);
         AuthorizeRequest(token);
-        
+
         return await _httpClient.GetAsync(endpoint);
+    }
+
+    protected async Task<HttpResponseMessage> Put<T>(
+        string endpoint,
+        T request,
+        string token = "",
+        string culture = "en")
+    {
+        ChangeCulture(culture);
+        AuthorizeRequest(token);
+
+        return await _httpClient.PutAsJsonAsync(endpoint, request);
     }
 
     private void ChangeCulture(string culture)
