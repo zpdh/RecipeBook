@@ -138,4 +138,10 @@
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Um erro desconhecido ocorreu.</value>
   </data>
+  <data name="NO_TOKEN" xml:space="preserve">
+    <value>Nenhum token de autorização foi identificado.</value>
+  </data>
+  <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
+    <value>O usuário providenciado não possui permissão para acessar esse recurso.</value>
+  </data>
 </root>

@@ -105,6 +105,15 @@ namespace RecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No authorization token was found..
+        /// </summary>
+        public static string NO_TOKEN {
+            get {
+                return ResourceManager.GetString("NO_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password must be atleast 6 characters long..
         /// </summary>
         public static string PASSWORD_LENGTH {
@@ -119,6 +128,15 @@ namespace RecipeBook.Exceptions {
         public static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided user does not have permission to access this resource..
+        /// </summary>
+        public static string USER_WITHOUT_PERMISSION {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION", resourceCulture);
             }
         }
     }

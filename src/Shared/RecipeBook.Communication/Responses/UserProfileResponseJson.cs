@@ -1,7 +1,7 @@
 namespace RecipeBook.Communication.Responses;
 
-public class RegisterUserResponseJson
+public class UserProfileResponseJson
 {
     public string Name { get; set; } = string.Empty;
-    public ResponseTokenJson Tokens { get; set; } = default!;
+    public string Email { get; set; } = string.Empty;
 }

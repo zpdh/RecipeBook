@@ -10,37 +10,92 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a896c532-b2ef-4783-8528-2c1d36a3a205" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Attributes/AuthenticatedUserAttribute.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Filters/AuthenticatedUserFilter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Token/HttpContextTokenValue.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/UseCases/User/Profile/GetUserProfileUseCase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/UseCases/User/Profile/IGetUserProfileUseCase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Security/Tokens/IAccessTokenGenerator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Security/Tokens/IAccessTokenValidator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Security/Tokens/ITokenProvider.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Services/LoggedUser/ILoggedUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/Security/Tokens/Generators/AcessTokenGenerator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/Security/Tokens/JwtTokenHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/Security/Tokens/Validators/JwtTokenValidator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/Services/LoggedUser/LoggedUser.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Shared/RecipeBook.Communication/Responses/ResponseTokenJson.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Shared/RecipeBook.Communication/Responses/UserProfileResponseJson.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Api.Test/User/Profile/GetUserProfileInvalidTokenTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/Api.Test/User/Profile/GetUserProfileTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/CommonTestUtils/LoggedUser/LoggedUserBuilder.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/CommonTestUtils/Tokens/JwtTokenGeneratorBuilder.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/UseCases.Test/User/Profile/GetUserProfileUseCaseTest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RecipeBook/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RecipeBook/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Controllers/UserController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.API/RecipeBook.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/RecipeBook.API.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.API/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/RecipeBook.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/RecipeBook.Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.API/appsettings.Test.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.API/appsettings.Test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/DependencyInjectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/DependencyInjectionExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/Services/AutoMapper/AutoMapping.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/Services/AutoMapper/AutoMapping.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/UseCases/Login/ExecuteLogin/ExecuteLoginUseCase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/UseCases/Login/ExecuteLogin/ExecuteLoginUseCase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/UseCases/User/Registration/RegisterUserUseCase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Application/UseCases/User/Registration/RegisterUserUseCase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Entities/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Repositories/User/IUserReadOnlyRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Domain/Repositories/User/IUserReadOnlyRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/DataAccess/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/DataAccess/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/DependencyInjectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/DependencyInjectionExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/Migrations/Versions/Version1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/Migrations/Versions/Version1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/RecipeBook.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/RecipeBook.Infrastructure/RecipeBook.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/RecipeBook.Communication/Responses/ErrorResponseJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/RecipeBook.Communication/Responses/ErrorResponseJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/RecipeBook.Communication/Responses/RegisterUserResponseJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/RecipeBook.Communication/Responses/RegisterUserResponseJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/RecipeBook.Exceptions/ExceptionsBase/RecipeBookException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/RecipeBook.Exceptions/ExceptionsBase/RecipeBookException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/RecipeBook.Exceptions/ResourceMessageExceptions.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/RecipeBook.Exceptions/ResourceMessageExceptions.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/RecipeBook.Exceptions/ResourceMessageExceptions.pt.resx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/RecipeBook.Exceptions/ResourceMessageExceptions.pt.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shared/RecipeBook.Exceptions/ResourceMessageExceptions.resx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/RecipeBook.Exceptions/ResourceMessageExceptions.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Api.Test/RecipeBookClassFixture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Api.Test/RecipeBookClassFixture.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Api.Test/User/Register/UserRegisterTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Api.Test/User/Register/UserRegisterTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/CommonTestUtils/CommonTestUtils.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CommonTestUtils/CommonTestUtils.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/CommonTestUtils/Entities/UserBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CommonTestUtils/Entities/UserBuilder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/UseCases.Test/Login/ExecuteLogin/ExecuteLoginUseCaseTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/UseCases.Test/Login/ExecuteLogin/ExecuteLoginUseCaseTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/UseCases.Test/User/Registration/RegisterUserUseCaseTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/UseCases.Test/User/Registration/RegisterUserUseCaseTest.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DpaMonitoringSettings">
-    <option name="autoShow" value="false" />
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/login-integration-tests" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Code/RecipeBook/src/Backend/RecipeBook.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Code/RecipeBook/src/Backend/RecipeBook.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Code/RecipeBook/src/Backend/RecipeBook.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Code/RecipeBook/src/Backend/RecipeBook.API/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/UseCases.Test/User/Registration/RegisterUserUseCaseTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/2f1db20456007c9515068a35a65afdf99af70bc6/src/DefaultBuilder/src/WebApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/2f1db20456007c9515068a35a65afdf99af70bc6/src/DefaultBuilder/src/WebApplicationBuilder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/2f1db20456007c9515068a35a65afdf99af70bc6/src/Mvc/Mvc.Core/src/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/aspnetcore/2f1db20456007c9515068a35a65afdf99af70bc6/src/Mvc/Mvc.Core/src/Infrastructure/ResourceInvoker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2aade6beb02ea367fd97c4070a4198802fe61c03/src/libraries/System.Private.CoreLib/src/System/Reflection/MethodBaseInvoker.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2aade6beb02ea367fd97c4070a4198802fe61c03/src/libraries/System.Private.CoreLib/src/System/Runtime/CompilerServices/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2aade6beb02ea367fd97c4070a4198802fe61c03/src/libraries/System.Private.CoreLib/src/System/String.Comparison.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2aade6beb02ea367fd97c4070a4198802fe61c03/src/libraries/System.Private.CoreLib/src/System/Threading/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2aade6beb02ea367fd97c4070a4198802fe61c03/src/libraries/System.Private.CoreLib/src/System/Threading/Tasks/Future.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/dotnet/runtime/2aade6beb02ea367fd97c4070a4198802fe61c03/src/libraries/System.Text.Json/src/System/Text/Json/Serialization/JsonConverterOfT.ReadCore.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5e15ba24065646ab8edfdd48fa903c1426a830/19/0448acf8/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/79671e03d66c4d48b25e9af977a3b837e0b0/7c/ba6ad67a/WebApplicationFactory`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3b92f859131bde25d0f7a63de08963e995d1e1426e584dfd4b8e833d2d3dba/ExecutionTimer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4117ae48b3954af098dc2bcb9d4faf457872e2718768ea11ac4054d4f02a9fa9/Guard.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a81ee8c4b239a5f464b996b6cb5ab701e2bca7511eb164cb746c7590c3b6b1/Mock`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b187261058fa986938df785f054eb6195e6a67e694894827255e0b7d7cf3/Mock.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c3ec25c53b94f51fa21da479c513e551efee2b5ae49a79934686d2bb714d46/TestInvoker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -54,28 +109,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.RecipeBook.API: IIS Express.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/add-user-entity",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.RecipeBook.API: IIS Express.executor&quot;: &quot;Run&quot;,
+    &quot;129e532e-9fb0-4827-85a3-acc5c00e5a46.executor&quot;: &quot;Debug&quot;,
+    &quot;47df4d15-43f6-41c7-95c5-5b5a2a18ebe4.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;fcd97810-1372-4bc7-939a-a6fdcbadab59.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Language Defaults&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Pedro\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Pedro\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Pedro\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Pedro\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Pedro\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Pedro\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.RecipeBook.API: IIS Express">
     <configuration name="RecipeBook.API: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/Backend/RecipeBook.API/RecipeBook.API.csproj" />
@@ -131,10 +189,30 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1722152569246</updated>
-      <workItem from="1722152570540" duration="7547000" />
-      <workItem from="1722191223974" duration="4228000" />
-      <workItem from="1722285830905" duration="6741000" />
-      <workItem from="1722299753396" duration="3961000" />
+      <workItem from="1722152570540" duration="359000" />
+      <workItem from="1722374270928" duration="3948000" />
+      <workItem from="1722395605006" duration="1960000" />
+      <workItem from="1722422218645" duration="2550000" />
+      <workItem from="1722424814128" duration="3228000" />
+      <workItem from="1722465584999" duration="9252000" />
+      <workItem from="1722550417546" duration="2128000" />
+      <workItem from="1722554224734" duration="725000" />
+      <workItem from="1722581931621" duration="7000" />
+      <workItem from="1722582890374" duration="16000" />
+      <workItem from="1722592029121" duration="49000" />
+      <workItem from="1722638745892" duration="17000" />
+      <workItem from="1722639285657" duration="69000" />
+      <workItem from="1722725564300" duration="4744000" />
+      <workItem from="1722730618056" duration="3745000" />
+      <workItem from="1722734444397" duration="3253000" />
+      <workItem from="1722752490878" duration="4234000" />
+      <workItem from="1722801113732" duration="290000" />
+      <workItem from="1722825070442" duration="2905000" />
+      <workItem from="1722833742118" duration="2116000" />
+      <workItem from="1722896018219" duration="5952000" />
+      <workItem from="1722906114546" duration="754000" />
+      <workItem from="1722910272233" duration="98000" />
+      <workItem from="1722910379809" duration="6426000" />
     </task>
     <task id="LOCAL-00001" summary="feat: adding user registration endpoint">
       <option name="closed" value="true" />
@@ -144,7 +222,71 @@
       <option name="project" value="LOCAL" />
       <updated>1722152924145</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="refactor: Fixing issues pointed out by SonarCloud">
+      <option name="closed" value="true" />
+      <created>1722552484579</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722552484579</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refactor: making DatabaseMigration.cs static">
+      <option name="closed" value="true" />
+      <created>1722554304648</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722554304648</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: add login method in user repository">
+      <option name="closed" value="true" />
+      <created>1722755972561</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722755972561</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: add login business rules and use cases">
+      <option name="closed" value="true" />
+      <created>1722756123641</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722756123641</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: add login business rules and use cases">
+      <option name="closed" value="true" />
+      <created>1722756335174</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722756335174</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: add login endpoints">
+      <option name="closed" value="true" />
+      <created>1722756457362</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1722756457362</updated>
+    </task>
+    <task id="LOCAL-00008" summary="tests: add tests for login usecases">
+      <option name="closed" value="true" />
+      <created>1722756595431</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1722756595431</updated>
+    </task>
+    <task id="LOCAL-00009" summary="tests: add login integration tests">
+      <option name="closed" value="true" />
+      <created>1722756650510</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722756650510</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,28 +294,37 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="dotnet:Microsoft.Identity.Client" />
+    <option featureType="dependencySupport" implementationName="dotnet:Microsoft.EntityFrameworkCore.Abstractions" />
+    <option featureType="dependencySupport" implementationName="dotnet:Microsoft.EntityFrameworkCore.Relational" />
+    <option featureType="dependencySupport" implementationName="dotnet:Microsoft.EntityFrameworkCore" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="feat: adding user registration endpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: adding user registration endpoint" />
+    <MESSAGE value="refactor: Fixing issues pointed out by SonarCloud" />
+    <MESSAGE value="refactor: making DatabaseMigration.cs static" />
+    <MESSAGE value="feat: add login method in user repository" />
+    <MESSAGE value="feat: add login business rules and use cases" />
+    <MESSAGE value="feat: add login endpoints" />
+    <MESSAGE value="tests: add tests for login usecases" />
+    <MESSAGE value="tests: add login integration tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests: add login integration tests" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/src/Backend/RecipeBook.API/Middleware/CultureMiddleware.cs</url>
-          <line>26</line>
-          <properties documentPath="C:\Code\RecipeBook\src\Backend\RecipeBook.API\Middleware\CultureMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
-            <startOffsets>
-              <option value="719" />
-            </startOffsets>
-            <endOffsets>
-              <option value="760" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -3,6 +3,7 @@ namespace RecipeBook.Communication.Responses;
 public class ErrorResponseJson
 {
     public IList<string> ErrorMessages { get; set; }
+    public bool TokenIsExpired { get; set; }
 
     public ErrorResponseJson(IList<string> errorMessages)
     {
