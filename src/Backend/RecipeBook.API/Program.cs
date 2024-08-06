@@ -19,12 +19,13 @@ builder.Services.AddControllers().AddJsonOptions(
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    const string bearer = "Bearer";
+    options.AddSecurityDefinition(bearer, new OpenApiSecurityScheme
     {
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
+        Scheme = bearer
     });
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
@@ -34,10 +35,10 @@ builder.Services.AddSwaggerGen(options =>
                 Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
+                    Id = bearer
                 },
                 Scheme = "oauth2",
-                Name = "Bearer",
+                Name = bearer,
                 In = ParameterLocation.Header
             },
             new List<string>()
