@@ -144,4 +144,7 @@
   <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
     <value>The provided user does not have permission to access this resource.</value>
   </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This email is already registered.</value>
+  </data>
 </root>

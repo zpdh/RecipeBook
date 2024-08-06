@@ -51,6 +51,7 @@ public static class DependencyInjectionExtension
 
         serviceCollection.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         serviceCollection.AddScoped<IUserReadOnlyRepository, UserRepository>();
+        serviceCollection.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
     }
 
     private static void AddDbContextSqlServer(IServiceCollection serviceCollection, IConfiguration configuration)

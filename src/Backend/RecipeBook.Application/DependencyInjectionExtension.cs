@@ -6,6 +6,7 @@ using RecipeBook.Application.UseCases.Login;
 using RecipeBook.Application.UseCases.Login.ExecuteLogin;
 using RecipeBook.Application.UseCases.User.Profile;
 using RecipeBook.Application.UseCases.User.Registration;
+using RecipeBook.Application.UseCases.User.Update;
 
 namespace RecipeBook.Application;
 
@@ -23,6 +24,7 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         serviceCollection.AddScoped<IExecuteLoginUseCase, ExecuteLoginUseCase>();
         serviceCollection.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
+        serviceCollection.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
     }
 
     private static void AddAutoMapper(IServiceCollection serviceCollection)
