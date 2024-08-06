@@ -73,7 +73,7 @@ public class UpdateUserUseCaseTest
         user.Email.Should().NotBe(request.Email);
     }
 
-    private static IUpdateUserUseCase CreateUseCase(
+    private static UpdateUserUseCase CreateUseCase(
         RecipeBook.Domain.Entities.User user,
         string? email = null)
     {

@@ -1,9 +1,9 @@
+using CommonTestUtils.Cryptography;
 using CommonTestUtils.Entities;
 using CommonTestUtils.Repositories;
 using CommonTestUtils.Requests;
 using CommonTestUtils.Tokens;
 using FluentAssertions;
-using RecipeBook.Application.Services.Cryptography;
 using RecipeBook.Application.UseCases.Login.ExecuteLogin;
 using RecipeBook.Communication.Requests;
 using RecipeBook.Exceptions;
@@ -17,7 +17,7 @@ public class ExecuteLoginUseCaseTest
     public async Task Success()
     {
         var (user, password) = UserBuilder.Build();
-        
+
         var useCase = InstanceUseCase(user);
 
         var result = await useCase.Execute(new LoginRequestJson
@@ -28,7 +28,7 @@ public class ExecuteLoginUseCaseTest
 
         result.Should().NotBeNull();
         result.Tokens.Should().NotBeNull();
-        
+
         result.Name.Should().NotBeNullOrWhiteSpace().And.Be(user.Name);
         result.Tokens.AccessToken.Should().NotBeNullOrWhiteSpace();
     }
@@ -57,6 +57,6 @@ public class ExecuteLoginUseCaseTest
             readRepoBuilder.GetByEmailAndPassword(user);
         }
 
-        return new ExecuteLoginUseCase(readRepoBuilder.Build(), new PasswordEncrypter(), tokenGenerator);
+        return new ExecuteLoginUseCase(readRepoBuilder.Build(), PasswordEncrypterBuilder.Build(), tokenGenerator);
     }
 }
