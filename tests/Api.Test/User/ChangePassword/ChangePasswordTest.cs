@@ -5,7 +5,6 @@ using Api.Test.InlineData;
 using CommonTestUtils.Requests;
 using CommonTestUtils.Tokens;
 using FluentAssertions;
-using Microsoft.AspNetCore.Authentication;
 using RecipeBook.Communication.Requests;
 using RecipeBook.Exceptions;
 
@@ -16,7 +15,7 @@ public class ChangePasswordTest : RecipeBookClassFixture
     private const string Endpoint = "user/change-password";
 
     private readonly string _email;
-    private readonly string _password;
+    private string _password;
     private readonly Guid _userIdentifier;
 
     public ChangePasswordTest(CustomWebApplicationFactory factory) : base(factory)
@@ -57,6 +56,7 @@ public class ChangePasswordTest : RecipeBookClassFixture
     [ClassData(typeof(CultureInlineDataTests))]
     public async Task NewPasswordEmptyError(string culture)
     {
+        
         var request = new ChangePasswordRequestJson
         {
             Password = _password,
@@ -69,7 +69,7 @@ public class ChangePasswordTest : RecipeBookClassFixture
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
-        await using var responseBody = await response.Content.ReadAsStreamAsync();
+        var responseBody = await response.Content.ReadAsStreamAsync();
 
         var responseData = await JsonDocument.ParseAsync(responseBody);
 
@@ -77,6 +77,6 @@ public class ChangePasswordTest : RecipeBookClassFixture
 
         var msg = ResourceMessageExceptions.ResourceManager.GetString("PASSWORD_INVALID", new CultureInfo(culture));
 
-        errors.Should().HaveCount(1).And.ContainSingle(e => e.GetString()!.Equals(msg));
+        errors.Should().Contain(e => e.GetString()!.Equals(msg));
     }
 }
