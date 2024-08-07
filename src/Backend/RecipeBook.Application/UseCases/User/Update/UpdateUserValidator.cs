@@ -12,7 +12,7 @@ public class UpdateUserValidator : AbstractValidator<UpdateUserRequestJson>
         RuleFor(request => request.Name)
             .NotEmpty()
             .WithMessage(ResourceMessageExceptions.NAME_EMPTY);
-
+        
         RuleFor(request => request.Email)
             .NotEmpty()
             .WithMessage(ResourceMessageExceptions.EMAIL_EMPTY);
