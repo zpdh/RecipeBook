@@ -123,6 +123,15 @@ namespace RecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This password is not valid..
+        /// </summary>
+        public static string PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password must be atleast 6 characters long..
         /// </summary>
         public static string PASSWORD_LENGTH {
