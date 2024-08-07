@@ -38,7 +38,7 @@ public class UpdateUserUseCase : IUpdateUserUseCase
 
         user.Name = request.Name;
         user.Email = request.Email;
-        
+
         _updateOnlyRepository.Update(user);
 
         await _unitOfWork.Commit();
@@ -62,11 +62,10 @@ public class UpdateUserUseCase : IUpdateUserUseCase
             }
         }
 
-        if (result.IsValid.IsFalse())
-        {
-            var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
+        if (result.IsValid) return;
 
-            throw new ErrorOnValidationException(errorMessages);
-        }
+        var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
+
+        throw new ErrorOnValidationException(errorMessages);
     }
 }

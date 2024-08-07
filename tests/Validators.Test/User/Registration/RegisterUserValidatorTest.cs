@@ -70,7 +70,7 @@ public class RegisterUserValidatorTest
     [InlineData(3)]
     [InlineData(4)]
     [InlineData(5)]
-    public void InvalidPasswordError(int passwordLength)
+    public void PasswordLengthError(int passwordLength)
     {
         var validator = new RegisterUserValidator();
 
@@ -79,7 +79,21 @@ public class RegisterUserValidatorTest
         var result = validator.Validate(request);
 
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().ContainSingle().And
-            .Contain(e => e.ErrorMessage.Equals(ResourceMessageExceptions.PASSWORD_LENGTH));
+        result.Errors.Should().ContainSingle()
+            .And.Contain(e => e.ErrorMessage.Equals(ResourceMessageExceptions.PASSWORD_LENGTH));
+    }
+
+    [Fact]
+    public void InvalidPasswordError()
+    {
+        var validator = new RegisterUserValidator();
+
+        var request = RegisterUserRequestJsonBuilder.Build(0);
+
+        var result = validator.Validate(request);
+
+        result.IsValid.Should().BeFalse();
+        result.Errors.Should().ContainSingle()
+            .And.Contain(e => e.ErrorMessage.Equals(ResourceMessageExceptions.PASSWORD_INVALID));
     }
 }
