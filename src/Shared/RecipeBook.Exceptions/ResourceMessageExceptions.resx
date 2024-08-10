@@ -150,4 +150,31 @@
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>This password is not valid.</value>
   </data>
+  <data name="RECIPE_TITLE_EMPTY" xml:space="preserve">
+    <value>The title field cannot be empty.</value>
+  </data>
+  <data name="NOT_ENUM" xml:space="preserve">
+    <value>There is no value associated with this integer.</value>
+  </data>
+  <data name="INGREDIENT_LIST_EMPTY" xml:space="preserve">
+    <value>A recipe must have atleast one ingredient.</value>
+  </data>
+  <data name="INSTRUCTION_LIST_EMPTY" xml:space="preserve">
+    <value>A recipe must have atleast one instruction.</value>
+  </data>
+  <data name="INGREDIENT_EMPTY" xml:space="preserve">
+    <value>An ingredient cannot be empty.</value>
+  </data>
+  <data name="INVALID_INSTRUCTION_INT" xml:space="preserve">
+    <value>The instruction integer must be greater than 0.</value>
+  </data>
+  <data name="INSTRUCTION_EMPTY" xml:space="preserve">
+    <value>An instruction cannot be empty.</value>
+  </data>
+  <data name="INSTRUCTION_TOO_LONG" xml:space="preserve">
+    <value>An instruction must have, at most, 2000 characters</value>
+  </data>
+  <data name="INSTRUCTION_DUPLICATED" xml:space="preserve">
+    <value>Two or more instructions have the same step value.</value>
+  </data>
 </root>
