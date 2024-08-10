@@ -17,9 +17,11 @@ public class RecipeBookClassFixture : IClassFixture<CustomWebApplicationFactory>
     protected async Task<HttpResponseMessage> Post<T>(
         string endpoint,
         T request,
+        string token = "",
         string culture = "en")
     {
         ChangeCulture(culture);
+        AuthorizeRequest(token);
 
         return await _httpClient.PostAsJsonAsync(endpoint, request);
     }

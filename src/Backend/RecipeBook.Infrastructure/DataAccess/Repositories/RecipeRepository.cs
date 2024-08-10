@@ -14,6 +14,6 @@ public class RecipeRepository : IRecipeWriteOnlyRepository
 
     public async Task Add(Recipe recipe)
     {
-        await _context.AddAsync(recipe);
+        await _context.Recipes.AddAsync(recipe);
     }
 }

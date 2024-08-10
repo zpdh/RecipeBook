@@ -25,7 +25,6 @@ public class RecipeValidatorTest
     public void NullCookingTimeSuccess()
     {
         var validator = new RecipeValidator();
-
         var request = RecipeRequestJsonBuilder.Build();
         request.CookingTime = null;
 
@@ -213,7 +212,7 @@ public class RecipeValidatorTest
     }
 
     [Fact]
-    public void DuplicatedInstruction()
+    public void DuplicatedInstructionError()
     {
         var validator = new RecipeValidator();
 
@@ -225,5 +224,20 @@ public class RecipeValidatorTest
         result.IsValid.Should().BeFalse();
         result.Errors.Should().ContainSingle()
             .And.Contain(e => e.ErrorMessage.Equals(ResourceMessageExceptions.INSTRUCTION_DUPLICATED));
+    }
+
+    [Fact]
+    public void InstructionTooLongError()
+    {
+        var request = RecipeRequestJsonBuilder.Build();
+        request.Instructions.First().Text = StringGeneratorRequest.LongString(minCharacters: 2001);
+
+        var validator = new RecipeValidator();
+
+        var result = validator.Validate(request);
+
+        result.IsValid.Should().BeFalse();
+        result.Errors.Should().ContainSingle()
+            .And.Contain(e => e.ErrorMessage.Equals(ResourceMessageExceptions.INSTRUCTION_TOO_LONG));
     }
 }
