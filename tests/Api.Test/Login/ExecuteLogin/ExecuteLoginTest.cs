@@ -48,7 +48,7 @@ public class ExecuteLoginTest : RecipeBookClassFixture
     {
         var request = LoginRequestJsonBuilder.Build();
         
-        var response = await Post(Endpoint, request, culture);
+        var response = await Post(Endpoint, request, culture: culture);
 
         await using var responseBody = await response.Content.ReadAsStreamAsync();
 
