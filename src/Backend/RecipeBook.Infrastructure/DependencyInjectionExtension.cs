@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RecipeBook.Domain.Enums;
 using RecipeBook.Domain.Extensions;
 using RecipeBook.Domain.Repositories;
+using RecipeBook.Domain.Repositories.Recipe;
 using RecipeBook.Domain.Repositories.User;
 using RecipeBook.Domain.Security.Cryptography;
 using RecipeBook.Domain.Security.Tokens;
@@ -55,6 +56,8 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         serviceCollection.AddScoped<IUserReadOnlyRepository, UserRepository>();
         serviceCollection.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+
+        serviceCollection.AddScoped<IRecipeWriteOnlyRepository, RecipeRepository>();
     }
 
     private static void AddDbContextSqlServer(IServiceCollection serviceCollection, IConfiguration configuration)
@@ -103,11 +106,11 @@ public static class DependencyInjectionExtension
     {
         serviceCollection.AddScoped<ILoggedUser, LoggedUser>();
     }
-    
+
     private static void AddPasswordEncrypter(IServiceCollection serviceCollection, IConfiguration configuration)
     {
         var passKey = configuration.GetValue<string>("Settings:Password:PasswordKey")!;
-        
+
         serviceCollection.AddScoped<IPasswordEncrypter>(options => new Sha512Encrypter(passKey));
     }
 }
