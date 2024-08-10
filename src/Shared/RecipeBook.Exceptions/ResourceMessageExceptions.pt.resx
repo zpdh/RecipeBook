@@ -150,4 +150,31 @@
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>Esta senha não é válida.</value>
   </data>
+  <data name="RECIPE_TITLE_EMPTY" xml:space="preserve">
+    <value>O campo de titulo não pode estar vazio.</value>
+  </data>
+  <data name="NOT_ENUM" xml:space="preserve">
+    <value>Não há valor associado com esse número inteiro.</value>
+  </data>
+  <data name="INGREDIENT_LIST_EMPTY" xml:space="preserve">
+    <value>Uma receita deve ter, no mínimo, um ingrediente.</value>
+  </data>
+  <data name="INSTRUCTION_LIST_EMPTY" xml:space="preserve">
+    <value>Uma receita deve ter, no mínimo, uma instrução.</value>
+  </data>
+  <data name="INGREDIENT_EMPTY" xml:space="preserve">
+    <value>Um ingrediente não pode estar vazio.</value>
+  </data>
+  <data name="INVALID_INSTRUCTION_INT" xml:space="preserve">
+    <value>O número da instrução deve ser maior que 0.</value>
+  </data>
+  <data name="INSTRUCTION_EMPTY" xml:space="preserve">
+    <value>Uma instrução não pode estarvazia.</value>
+  </data>
+  <data name="INSTRUCTION_TOO_LONG" xml:space="preserve">
+    <value>Uma instrução deve ter, no máximo, 2000 caracteres.</value>
+  </data>
+  <data name="INSTRUCTION_DUPLICATED" xml:space="preserve">
+    <value>Duas ou mais instruções possuem o mesmo valor de etapa.</value>
+  </data>
 </root>

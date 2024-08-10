@@ -105,6 +105,69 @@ namespace RecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An ingredient cannot be empty..
+        /// </summary>
+        public static string INGREDIENT_EMPTY {
+            get {
+                return ResourceManager.GetString("INGREDIENT_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A recipe must have atleast one ingredient..
+        /// </summary>
+        public static string INGREDIENT_LIST_EMPTY {
+            get {
+                return ResourceManager.GetString("INGREDIENT_LIST_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Two or more instructions have the same step value..
+        /// </summary>
+        public static string INSTRUCTION_DUPLICATED {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_DUPLICATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An instruction cannot be empty..
+        /// </summary>
+        public static string INSTRUCTION_EMPTY {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A recipe must have atleast one instruction..
+        /// </summary>
+        public static string INSTRUCTION_LIST_EMPTY {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_LIST_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An instruction must have, at most, 2000 characters.
+        /// </summary>
+        public static string INSTRUCTION_TOO_LONG {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_TOO_LONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The instruction integer must be greater than 0..
+        /// </summary>
+        public static string INVALID_INSTRUCTION_INT {
+            get {
+                return ResourceManager.GetString("INVALID_INSTRUCTION_INT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The field &apos;name&apos; cannot be empty..
         /// </summary>
         public static string NAME_EMPTY {
@@ -123,6 +186,15 @@ namespace RecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no value associated with this integer..
+        /// </summary>
+        public static string NOT_ENUM {
+            get {
+                return ResourceManager.GetString("NOT_ENUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This password is not valid..
         /// </summary>
         public static string PASSWORD_INVALID {
@@ -137,6 +209,15 @@ namespace RecipeBook.Exceptions {
         public static string PASSWORD_LENGTH {
             get {
                 return ResourceManager.GetString("PASSWORD_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The title field cannot be empty..
+        /// </summary>
+        public static string RECIPE_TITLE_EMPTY {
+            get {
+                return ResourceManager.GetString("RECIPE_TITLE_EMPTY", resourceCulture);
             }
         }
         
