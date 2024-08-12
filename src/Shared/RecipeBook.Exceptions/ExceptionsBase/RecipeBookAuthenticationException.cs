@@ -1,8 +1,8 @@
-﻿using System.Net;
+using System.Net;
 
 namespace RecipeBook.Exceptions.ExceptionsBase;
 
-public class InvalidLoginException() : RecipeBookException(ResourceMessageExceptions.EMAIL_OR_PASSWORD_INVALID)
+public class RecipeBookAuthenticationException(string message) : RecipeBookException(message)
 {
     public override IList<string> GetErrorMessages()
     {

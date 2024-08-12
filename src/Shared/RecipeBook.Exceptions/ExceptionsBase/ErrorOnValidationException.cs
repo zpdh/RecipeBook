@@ -1,11 +1,16 @@
+using System.Net;
+
 namespace RecipeBook.Exceptions.ExceptionsBase;
 
-public class ErrorOnValidationException : RecipeBookException
+public class ErrorOnValidationException(IList<string> errorMessages) : RecipeBookException(string.Empty)
 {
-    public IList<string> ErrorMessages { get; set; }
-
-    public ErrorOnValidationException(IList<string> errorMessages) : base(string.Empty)
+    public override IList<string> GetErrorMessages()
     {
-        ErrorMessages = errorMessages;
+        return errorMessages;
+    }
+
+    public override HttpStatusCode GetStatusCode()
+    {
+        return HttpStatusCode.BadRequest;
     }
 }

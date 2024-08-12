@@ -46,8 +46,8 @@ public class FilterRecipeUseCaseTest
         var act = async () => await useCase.Execute(request);
 
         (await act.Should().ThrowAsync<ErrorOnValidationException>()).Where(e =>
-            e.ErrorMessages.Count == 1
-            && e.ErrorMessages.Contains(ResourceMessageExceptions.NOT_ENUM));
+            e.GetErrorMessages().Count == 1
+            && e.GetErrorMessages().Contains(ResourceMessageExceptions.NOT_ENUM));
     }
 
     private static FilterRecipeUseCase CreateUseCase(

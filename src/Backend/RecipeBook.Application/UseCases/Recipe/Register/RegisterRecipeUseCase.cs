@@ -41,7 +41,7 @@ public class RegisterRecipeUseCase : IRegisterRecipeUseCase
 
         for (var i = 0; i < instructions.Count; i++)
         {
-            instructions.ElementAt(i).Step = i + 1;
+            instructions[i].Step = i + 1;
         }
 
         recipe.Instructions = _mapper.Map<IList<Instruction>>(instructions);

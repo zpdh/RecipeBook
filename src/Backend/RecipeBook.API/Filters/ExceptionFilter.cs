@@ -11,9 +11,9 @@ public class ExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
-        if (context.Exception is RecipeBookException)
+        if (context.Exception is RecipeBookException exception)
         {
-            HandleException(context);
+            HandleException(context, exception);
         }
         else
         {
@@ -21,25 +21,16 @@ public class ExceptionFilter : IExceptionFilter
         }
     }
 
-    private static void HandleException(ExceptionContext context)
+    private static void HandleException(ExceptionContext context, RecipeBookException exception)
     {
-        switch (context.Exception)
-        {
-            case ErrorOnValidationException e:
-                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                context.Result = new BadRequestObjectResult(new ErrorResponseJson(e.ErrorMessages));
-                break;
-
-            case InvalidLoginException e:
-                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                context.Result = new UnauthorizedObjectResult(new ErrorResponseJson(e.Message));
-                break;
-        }
+        context.HttpContext.Response.StatusCode = (int)exception.GetStatusCode();
+        context.Result = new ObjectResult(new ErrorResponseJson(exception.GetErrorMessages()));
     }
+
 
     private static void ThrowUnknownException(ExceptionContext context)
     {
-        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Result = new ObjectResult(new ErrorResponseJson(ResourceMessageExceptions.UNKNOWN_ERROR));
     }
 }

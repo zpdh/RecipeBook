@@ -177,4 +177,7 @@
   <data name="INSTRUCTION_DUPLICATED" xml:space="preserve">
     <value>Duas ou mais instruções possuem o mesmo valor de etapa.</value>
   </data>
+  <data name="RECIPE_NOT_FOUND" xml:space="preserve">
+    <value>Nenhuma receita foi encontrada.</value>
+  </data>
 </root>

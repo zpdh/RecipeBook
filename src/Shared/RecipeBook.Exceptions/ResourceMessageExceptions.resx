@@ -177,4 +177,7 @@
   <data name="INSTRUCTION_DUPLICATED" xml:space="preserve">
     <value>Two or more instructions have the same step value.</value>
   </data>
+  <data name="RECIPE_NOT_FOUND" xml:space="preserve">
+    <value>No recipe was found.</value>
+  </data>
 </root>

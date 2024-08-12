@@ -1,8 +1,8 @@
-﻿using System.Net;
+using System.Net;
 
 namespace RecipeBook.Exceptions.ExceptionsBase;
 
-public class InvalidLoginException() : RecipeBookException(ResourceMessageExceptions.EMAIL_OR_PASSWORD_INVALID)
+public class NotFoundException(string message) : RecipeBookException(message)
 {
     public override IList<string> GetErrorMessages()
     {
@@ -11,6 +11,6 @@ public class InvalidLoginException() : RecipeBookException(ResourceMessageExcept
 
     public override HttpStatusCode GetStatusCode()
     {
-        return HttpStatusCode.Unauthorized;
+        return HttpStatusCode.NotFound;
     }
 }
