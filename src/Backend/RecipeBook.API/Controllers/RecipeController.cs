@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RecipeBook.API.Attributes;
+using RecipeBook.Application.UseCases.Recipe.Filter;
 using RecipeBook.Application.UseCases.Recipe.Register;
 using RecipeBook.Communication.Requests;
 using RecipeBook.Communication.Responses;
@@ -19,5 +20,22 @@ public class RecipeController : RecipeBookBaseController
         var response = await useCase.Execute(request);
 
         return Created(string.Empty, response);
+    }
+
+    [HttpPost("filter")]
+    [ProducesResponseType(typeof(RecipesResponseJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> Filter(
+        [FromServices] IFilterRecipeUseCase useCase,
+        [FromBody] RecipeFilterRequestJson request)
+    {
+        var response = await useCase.Execute(request);
+
+        if (response.Recipes.Any())
+        {
+            return Ok(response);
+        }
+
+        return NoContent();
     }
 }
