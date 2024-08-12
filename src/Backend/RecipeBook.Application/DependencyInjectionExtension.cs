@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RecipeBook.Application.Services.AutoMapper;
 using RecipeBook.Application.UseCases.Login;
 using RecipeBook.Application.UseCases.Login.ExecuteLogin;
+using RecipeBook.Application.UseCases.Recipe.Filter;
 using RecipeBook.Application.UseCases.Recipe.Register;
 using RecipeBook.Application.UseCases.User.ChangePassword;
 using RecipeBook.Application.UseCases.User.Profile;
@@ -28,6 +29,7 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         serviceCollection.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
         serviceCollection.AddScoped<IRegisterRecipeUseCase, RegisterRecipeUseCase>();
+        serviceCollection.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
     }
 
     private static void AddAutoMapper(IServiceCollection serviceCollection, IConfiguration configuration)
