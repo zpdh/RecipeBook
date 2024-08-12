@@ -13,7 +13,7 @@ public class RecipeRegisterTest : RecipeBookClassFixture
 {
     private const string Endpoint = "recipe";
 
-    private Guid _userIdentifier;
+    private readonly Guid _userIdentifier;
     
     public RecipeRegisterTest(CustomWebApplicationFactory factory) : base(factory)
     {

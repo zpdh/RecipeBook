@@ -45,7 +45,7 @@ public class RegisterRecipeUseCaseTest
                         && e.ErrorMessages.Contains(ResourceMessageExceptions.RECIPE_TITLE_EMPTY));
     }
     
-    private static IRegisterRecipeUseCase CreateUseCase(RecipeBook.Domain.Entities.User user)
+    private static RegisterRecipeUseCase CreateUseCase(RecipeBook.Domain.Entities.User user)
     {
         var mapper = MapperBuilder.Build();
         var unitOfWork = UnitOfWorkBuilder.Build();

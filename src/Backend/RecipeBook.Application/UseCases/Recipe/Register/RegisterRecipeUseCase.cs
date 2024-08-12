@@ -32,7 +32,7 @@ public class RegisterRecipeUseCase : IRegisterRecipeUseCase
     {
         Validate(request);
 
-        var user = _loggedUser.User();
+        var user = await _loggedUser.User();
 
         var recipe = _mapper.Map<Domain.Entities.Recipe>(request);
         recipe.UserId = user.Id;
