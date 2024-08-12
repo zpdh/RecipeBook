@@ -11,7 +11,8 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
     public RecipeBook.Domain.Entities.User User { get; private set; } = default!;
     public string Password { get; private set; } = string.Empty;
-    
+    public RecipeBook.Domain.Entities.Recipe Recipe { get; private set; } = default!;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test").ConfigureServices(services =>
@@ -37,21 +38,20 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             var context = scope.ServiceProvider.GetRequiredService<RecipeBookDbContext>();
 
             context.Database.EnsureDeleted();
-            
+
             StartDatabase(context);
         });
     }
-    
-    
-    
+
+
     private void StartDatabase(RecipeBookDbContext context)
     {
-        var (user, password) = UserBuilder.Build();
+        (User, Password) = UserBuilder.Build();
 
-        User = user;
-        Password = password;
-        
-        context.Users.Add(user);
+        Recipe = RecipeBuilder.Build(User);
+
+        context.Users.Add(User);
+        context.Recipes.Add(Recipe);
 
         context.SaveChanges();
     }
