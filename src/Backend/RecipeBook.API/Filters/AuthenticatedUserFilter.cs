@@ -35,7 +35,7 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
 
             if (exists.IsFalse())
             {
-                throw new RecipeBookException(ResourceMessageExceptions.USER_WITHOUT_PERMISSION);
+                throw new RecipeBookAuthenticationException(ResourceMessageExceptions.USER_WITHOUT_PERMISSION);
             }
         }
         catch (RecipeBookException e)
@@ -62,7 +62,7 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
 
         if (string.IsNullOrWhiteSpace(authentication))
         {
-            throw new RecipeBookException(ResourceMessageExceptions.NO_TOKEN);
+            throw new RecipeBookAuthenticationException(ResourceMessageExceptions.NO_TOKEN);
         }
 
         //.. = Range operator; Splits the array at given position and returns everything before/after said position

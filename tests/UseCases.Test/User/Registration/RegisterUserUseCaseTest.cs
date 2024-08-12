@@ -41,8 +41,8 @@ public class RegisterUserUseCaseTest
 
         (await act.Should().ThrowAsync<ErrorOnValidationException>())
             .Where(e =>
-                e.ErrorMessages.Count == 1 &&
-                e.ErrorMessages.Contains(ResourceMessageExceptions.EMAIL_EXISTS));
+                e.GetErrorMessages().Count == 1 &&
+                e.GetErrorMessages().Contains(ResourceMessageExceptions.EMAIL_EXISTS));
     }
     
     
@@ -64,8 +64,8 @@ public class RegisterUserUseCaseTest
 
         (await act.Should().ThrowAsync<ErrorOnValidationException>())
             .Where(e =>
-                e.ErrorMessages.Count == 1 &&
-                e.ErrorMessages.Contains(ResourceMessageExceptions.NAME_EMPTY));
+                e.GetErrorMessages().Count == 1 &&
+                e.GetErrorMessages().Contains(ResourceMessageExceptions.NAME_EMPTY));
     }
 
     private static RegisterUserUseCase InstanceUseCase(string? email = null)

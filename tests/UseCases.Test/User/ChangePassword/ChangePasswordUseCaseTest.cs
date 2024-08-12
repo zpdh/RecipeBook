@@ -50,8 +50,8 @@ public class ChangePasswordUseCaseTest
         var error = await act.Should().ThrowAsync<ErrorOnValidationException>();
 
         error.Where(e =>
-            e.ErrorMessages.Count == 1
-            && e.ErrorMessages.Contains(ResourceMessageExceptions.PASSWORD_INVALID));
+            e.GetErrorMessages().Count == 1
+            && e.GetErrorMessages().Contains(ResourceMessageExceptions.PASSWORD_INVALID));
 
         var encrypter = PasswordEncrypterBuilder.Build();
 
@@ -72,8 +72,8 @@ public class ChangePasswordUseCaseTest
         var error = await act.Should().ThrowAsync<ErrorOnValidationException>();
 
         error.Where(e =>
-            e.ErrorMessages.Count == 1
-            && e.ErrorMessages.Contains(ResourceMessageExceptions.PASSWORD_INVALID));
+            e.GetErrorMessages().Count == 1
+            && e.GetErrorMessages().Contains(ResourceMessageExceptions.PASSWORD_INVALID));
 
         var encrypter = PasswordEncrypterBuilder.Build();
 
