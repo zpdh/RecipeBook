@@ -4,6 +4,7 @@ using RecipeBook.Application.Services.AutoMapper;
 using RecipeBook.Application.UseCases.Login;
 using RecipeBook.Application.UseCases.Login.ExecuteLogin;
 using RecipeBook.Application.UseCases.Recipe.Filter;
+using RecipeBook.Application.UseCases.Recipe.GetById;
 using RecipeBook.Application.UseCases.Recipe.Register;
 using RecipeBook.Application.UseCases.User.ChangePassword;
 using RecipeBook.Application.UseCases.User.Profile;
@@ -17,7 +18,8 @@ public static class DependencyInjectionExtension
 {
     public static void AddApplication(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        AddAutoMapper(serviceCollection, configuration);
+        AddIdEncoder(serviceCollection, configuration);
+        AddAutoMapper(serviceCollection);
         AddUseCases(serviceCollection);
     }
 
@@ -30,19 +32,26 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
         serviceCollection.AddScoped<IRegisterRecipeUseCase, RegisterRecipeUseCase>();
         serviceCollection.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
+        serviceCollection.AddScoped<IGetRecipeByIdUseCase, GetRecipeByIdUseCase>();
     }
 
-    private static void AddAutoMapper(IServiceCollection serviceCollection, IConfiguration configuration)
+    private static void AddAutoMapper(IServiceCollection serviceCollection)
+    {
+        serviceCollection.AddScoped(provider => new AutoMapper.MapperConfiguration(options =>
+        {
+            var sqids = provider.GetService<SqidsEncoder<long>>()!;
+            options.AddProfile(new AutoMapping(sqids));
+        }).CreateMapper());
+    }
+
+    private static void AddIdEncoder(IServiceCollection serviceCollection, IConfiguration configuration)
     {
         var sqids = new SqidsEncoder<long>(new SqidsOptions
         {
             MinLength = 10,
             Alphabet = configuration.GetValue<string>("Settings:CryptographyAlphabet")!
         });
-        
-        serviceCollection.AddScoped(provider => new AutoMapper.MapperConfiguration(options =>
-        {
-            options.AddProfile(new AutoMapping(sqids));
-        }).CreateMapper());
+
+        serviceCollection.AddSingleton(sqids);
     }
 }
