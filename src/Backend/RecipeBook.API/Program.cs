@@ -19,6 +19,8 @@ builder.Services.AddControllers().AddJsonOptions(
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
+    options.OperationFilter<IdsFilter>();
+    
     const string bearer = "Bearer";
     options.AddSecurityDefinition(bearer, new OpenApiSecurityScheme
     {
