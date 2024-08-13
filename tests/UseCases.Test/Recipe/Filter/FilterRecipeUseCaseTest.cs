@@ -57,7 +57,7 @@ public class FilterRecipeUseCaseTest
     {
         var mapper = MapperBuilder.Build();
         var loggedUser = LoggedUserBuilder.Build(user);
-        var readRepo = new IRecipeReadOnlyRepositoryBuilder().Filter(user, recipes).Build();
+        var readRepo = new RecipeReadOnlyRepositoryBuilder().Filter(user, recipes).Build();
 
         return new FilterRecipeUseCase(mapper, loggedUser, readRepo);
     }
