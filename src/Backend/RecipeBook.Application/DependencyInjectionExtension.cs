@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RecipeBook.Application.Services.AutoMapper;
 using RecipeBook.Application.UseCases.Login;
 using RecipeBook.Application.UseCases.Login.ExecuteLogin;
+using RecipeBook.Application.UseCases.Recipe.Delete;
 using RecipeBook.Application.UseCases.Recipe.Filter;
 using RecipeBook.Application.UseCases.Recipe.GetById;
 using RecipeBook.Application.UseCases.Recipe.Register;
@@ -33,6 +34,7 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IRegisterRecipeUseCase, RegisterRecipeUseCase>();
         serviceCollection.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
         serviceCollection.AddScoped<IGetRecipeByIdUseCase, GetRecipeByIdUseCase>();
+        serviceCollection.AddScoped<IDeleteRecipeUseCase, DeleteRecipeUseCase>();
     }
 
     private static void AddAutoMapper(IServiceCollection serviceCollection)
