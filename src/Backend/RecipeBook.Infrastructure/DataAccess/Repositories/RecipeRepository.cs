@@ -21,6 +21,15 @@ public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepos
             .AddAsync(recipe);
     }
 
+    public async Task Delete(long id)
+    {
+        var recipe = await _context.Recipes
+            .FindAsync(id);
+
+        _context.Recipes
+            .Remove(recipe!);
+    }
+
     public async Task<IList<Recipe>> Filter(User user, RecipeFiltersDto filters)
     {
         var query = _context.Recipes
