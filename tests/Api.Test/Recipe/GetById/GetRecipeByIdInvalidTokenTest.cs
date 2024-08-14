@@ -8,19 +8,19 @@ namespace Api.Test.Recipe.GetById;
 public class GetRecipeByIdInvalidTokenTest : RecipeBookClassFixture
 {
     private const string Endpoint = "recipe";
-    private readonly long _id;
+    private readonly string _recipeId;
 
     public GetRecipeByIdInvalidTokenTest(CustomWebApplicationFactory factory) : base(factory)
     {
-        _id = factory.Recipe.Id;
+        var encoder = IdEncoderBuilder.Build();
+
+        _recipeId = encoder.Encode(factory.Recipe.Id);
     }
 
     [Fact]
     public async Task InvalidTokenError()
     {
-        var id = IdEncoderBuilder.Build().Encode(_id);
-
-        var result = await Get($"{Endpoint}/{id}", "look at me!");
+        var result = await Get($"{Endpoint}/{_recipeId}", "look at me!");
 
         result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
@@ -28,9 +28,7 @@ public class GetRecipeByIdInvalidTokenTest : RecipeBookClassFixture
     [Fact]
     public async Task NoTokenError()
     {
-        var id = IdEncoderBuilder.Build().Encode(_id);
-
-        var result = await Get($"{Endpoint}/{id}");
+        var result = await Get($"{Endpoint}/{_recipeId}");
 
         result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
@@ -38,10 +36,8 @@ public class GetRecipeByIdInvalidTokenTest : RecipeBookClassFixture
     [Fact]
     public async Task UnknownTokenError()
     {
-        var id = IdEncoderBuilder.Build().Encode(_id);
-
         var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid());
-        var result = await Get($"{Endpoint}/{id}", token);
+        var result = await Get($"{Endpoint}/{_recipeId}", token);
 
         result.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
