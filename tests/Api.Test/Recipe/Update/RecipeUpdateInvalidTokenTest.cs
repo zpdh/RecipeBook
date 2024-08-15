@@ -46,5 +46,7 @@ public class RecipeUpdateInvalidTokenTest : RecipeBookClassFixture
         var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid());
 
         var response = await Put($"{Endpoint}/{_recipeId}", request, token);
+
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 }
