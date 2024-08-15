@@ -32,6 +32,13 @@ public class RecipeReadOnlyRepositoryBuilder
         return this;
     }
 
+    public RecipeReadOnlyRepositoryBuilder GetDashboardRecipes(User user, IList<Recipe> recipes)
+    {
+        _repository.Setup(repository => repository.GetDashboardRecipes(user)).ReturnsAsync(recipes);
+
+        return this;
+    }
+
     public IRecipeReadOnlyRepository Build()
     {
         return _repository.Object;

@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RecipeBook.Application.Services.AutoMapper;
+using RecipeBook.Application.UseCases.Dashboard.Get;
 using RecipeBook.Application.UseCases.Login;
 using RecipeBook.Application.UseCases.Login.ExecuteLogin;
 using RecipeBook.Application.UseCases.Recipe.Delete;
@@ -37,6 +38,8 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IGetRecipeByIdUseCase, GetRecipeByIdUseCase>();
         serviceCollection.AddScoped<IDeleteRecipeUseCase, DeleteRecipeUseCase>();
         serviceCollection.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();
+
+        serviceCollection.AddScoped<IGetDashboardUseCase, GetDashboardUseCase>();
     }
 
     private static void AddAutoMapper(IServiceCollection serviceCollection)

@@ -50,6 +50,17 @@ public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepos
             .FirstOrDefaultAsync(recipe => recipe.IsActive && recipe.Id == recipeId && recipe.UserId == user.Id);
     }
 
+    public async Task<IList<Recipe>> GetDashboardRecipes(User user)
+    {
+        return await _context.Recipes
+            .AsNoTracking()
+            .Include(recipe => recipe.Ingredients)
+            .Where(recipe => recipe.IsActive && recipe.UserId == user.Id)
+            .OrderByDescending(recipe => recipe.CreationDate)
+            .Take(5)
+            .ToListAsync();
+    }
+
     private static IQueryable<Recipe> ApplyFilters(RecipeFiltersDto filters, IQueryable<Recipe> query)
     {
         if (filters.Difficulties.Any())
