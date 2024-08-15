@@ -59,6 +59,7 @@ public static class DependencyInjectionExtension
 
         serviceCollection.AddScoped<IRecipeWriteOnlyRepository, RecipeRepository>();
         serviceCollection.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
+        serviceCollection.AddScoped<IRecipeUpdateOnlyRepository, RecipeRepository>();
     }
 
     private static void AddDbContextSqlServer(IServiceCollection serviceCollection, IConfiguration configuration)
