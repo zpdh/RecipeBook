@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using RecipeBook.Domain.DTOs;
 using RecipeBook.Domain.Entities;
 using RecipeBook.Domain.Extensions;
@@ -6,7 +7,7 @@ using RecipeBook.Domain.Repositories.Recipe;
 
 namespace RecipeBook.Infrastructure.DataAccess.Repositories;
 
-public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository
+public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository, IRecipeUpdateOnlyRepository
 {
     private readonly RecipeBookDbContext _context;
 
@@ -42,13 +43,10 @@ public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepos
         return await query.ToListAsync();
     }
 
-    public async Task<Recipe?> GetById(User user, long recipeId)
+    async Task<Recipe?> IRecipeReadOnlyRepository.GetById(User user, long recipeId)
     {
-        return await _context.Recipes
+        return await GetRecipe()
             .AsNoTracking()
-            .Include(recipe => recipe.Ingredients)
-            .Include(recipe => recipe.Instructions)
-            .Include(recipe => recipe.DishTypes)
             .FirstOrDefaultAsync(recipe => recipe.IsActive && recipe.Id == recipeId && recipe.UserId == user.Id);
     }
 
@@ -82,5 +80,25 @@ public class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepos
         }
 
         return query;
+    }
+
+    async Task<Recipe?> IRecipeUpdateOnlyRepository.GetById(User user, long recipeId)
+    {
+        return await GetRecipe()
+            .FirstOrDefaultAsync(recipe => recipe.IsActive && recipe.Id == recipeId && recipe.UserId == user.Id);
+    }
+
+    public void Update(Recipe recipe)
+    {
+        _context.Recipes
+            .Update(recipe);
+    }
+
+    private IIncludableQueryable<Recipe, IList<DishType>> GetRecipe()
+    {
+        return _context.Recipes
+            .Include(recipe => recipe.Ingredients)
+            .Include(recipe => recipe.Instructions)
+            .Include(recipe => recipe.DishTypes);
     }
 }
