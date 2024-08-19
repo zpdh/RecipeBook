@@ -3,6 +3,7 @@ using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OpenAI_API;
 using RecipeBook.Domain.Enums;
 using RecipeBook.Domain.Extensions;
 using RecipeBook.Domain.Repositories;
@@ -11,6 +12,7 @@ using RecipeBook.Domain.Repositories.User;
 using RecipeBook.Domain.Security.Cryptography;
 using RecipeBook.Domain.Security.Tokens;
 using RecipeBook.Domain.Services.LoggedUser;
+using RecipeBook.Domain.Services.OpenAI;
 using RecipeBook.Infrastructure.DataAccess;
 using RecipeBook.Infrastructure.DataAccess.Repositories;
 using RecipeBook.Infrastructure.Extensions;
@@ -18,6 +20,7 @@ using RecipeBook.Infrastructure.Security.Cryptography;
 using RecipeBook.Infrastructure.Security.Tokens.Generators;
 using RecipeBook.Infrastructure.Security.Tokens.Validators;
 using RecipeBook.Infrastructure.Services.LoggedUser;
+using RecipeBook.Infrastructure.Services.OpenAI;
 
 namespace RecipeBook.Infrastructure;
 
@@ -29,6 +32,7 @@ public static class DependencyInjectionExtension
         AddLoggedUser(serviceCollection);
         AddTokens(serviceCollection, configuration);
         AddPasswordEncrypter(serviceCollection, configuration);
+        AddOpenAI(serviceCollection, configuration);
 
         if (configuration.IsUnitTestEnviroment())
         {
@@ -107,6 +111,16 @@ public static class DependencyInjectionExtension
     private static void AddLoggedUser(IServiceCollection serviceCollection)
     {
         serviceCollection.AddScoped<ILoggedUser, LoggedUser>();
+    }
+
+    private static void AddOpenAI(IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddScoped<IGenerateRecipeAI, ChatGPTService>();
+
+        var key = configuration.GetValue<string>("Settings:OpenAI:ApiKey");
+        var authentication = new APIAuthentication(key);
+
+        services.AddScoped<IOpenAIAPI>(option => new OpenAIAPI(authentication));
     }
 
     private static void AddPasswordEncrypter(IServiceCollection serviceCollection, IConfiguration configuration)
