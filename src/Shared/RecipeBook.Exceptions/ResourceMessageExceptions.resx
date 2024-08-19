@@ -180,4 +180,13 @@
   <data name="RECIPE_NOT_FOUND" xml:space="preserve">
     <value>No recipe was found.</value>
   </data>
+  <data name="INVALID_NUMBER_OF_INGREDIENTS" xml:space="preserve">
+    <value>There are too many ingredients in your request. Pick 1 to 5 ingredients.</value>
+  </data>
+  <data name="DUPLICATE_INGREDIENTS" xml:space="preserve">
+    <value>There are duplicate ingredients in your request.</value>
+  </data>
+  <data name="INGREDIENT_NOT_FOLLOWING_PATTERN" xml:space="preserve">
+    <value>This ingredient contains unallowed characters or too many whitespaces.</value>
+  </data>
 </root>

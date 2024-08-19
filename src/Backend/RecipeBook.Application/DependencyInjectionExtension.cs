@@ -6,6 +6,7 @@ using RecipeBook.Application.UseCases.Login;
 using RecipeBook.Application.UseCases.Login.ExecuteLogin;
 using RecipeBook.Application.UseCases.Recipe.Delete;
 using RecipeBook.Application.UseCases.Recipe.Filter;
+using RecipeBook.Application.UseCases.Recipe.Generate;
 using RecipeBook.Application.UseCases.Recipe.GetById;
 using RecipeBook.Application.UseCases.Recipe.Register;
 using RecipeBook.Application.UseCases.Recipe.Update;
@@ -40,6 +41,8 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();
 
         serviceCollection.AddScoped<IGetDashboardUseCase, GetDashboardUseCase>();
+
+        serviceCollection.AddScoped<IGenerateRecipeUseCase, GenerateRecipeUseCase>();
     }
 
     private static void AddAutoMapper(IServiceCollection serviceCollection)

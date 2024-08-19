@@ -60,6 +60,15 @@ namespace RecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are duplicate ingredients in your request..
+        /// </summary>
+        public static string DUPLICATE_INGREDIENTS {
+            get {
+                return ResourceManager.GetString("DUPLICATE_INGREDIENTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This email is already registered..
         /// </summary>
         public static string EMAIL_ALREADY_REGISTERED {
@@ -123,6 +132,15 @@ namespace RecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This ingredient contains unallowed characters or too many whitespaces..
+        /// </summary>
+        public static string INGREDIENT_NOT_FOLLOWING_PATTERN {
+            get {
+                return ResourceManager.GetString("INGREDIENT_NOT_FOLLOWING_PATTERN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Two or more instructions have the same step value..
         /// </summary>
         public static string INSTRUCTION_DUPLICATED {
@@ -164,6 +182,15 @@ namespace RecipeBook.Exceptions {
         public static string INVALID_INSTRUCTION_INT {
             get {
                 return ResourceManager.GetString("INVALID_INSTRUCTION_INT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are too many ingredients in your request. Pick 1 to 5 ingredients..
+        /// </summary>
+        public static string INVALID_NUMBER_OF_INGREDIENTS {
+            get {
+                return ResourceManager.GetString("INVALID_NUMBER_OF_INGREDIENTS", resourceCulture);
             }
         }
         

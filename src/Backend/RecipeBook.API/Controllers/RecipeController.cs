@@ -3,6 +3,7 @@ using RecipeBook.API.Attributes;
 using RecipeBook.API.Binders;
 using RecipeBook.Application.UseCases.Recipe.Delete;
 using RecipeBook.Application.UseCases.Recipe.Filter;
+using RecipeBook.Application.UseCases.Recipe.Generate;
 using RecipeBook.Application.UseCases.Recipe.GetById;
 using RecipeBook.Application.UseCases.Recipe.Register;
 using RecipeBook.Application.UseCases.Recipe.Update;
@@ -49,7 +50,8 @@ public class RecipeController : RecipeBookBaseController
     [ProducesResponseType(typeof(ErrorResponseJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(
         [FromServices] IGetRecipeByIdUseCase useCase,
-        [FromRoute] [ModelBinder(typeof(IdBinder))] long id)
+        [FromRoute] [ModelBinder(typeof(IdBinder))]
+        long id)
     {
         var response = await useCase.Execute(id);
 
@@ -62,7 +64,8 @@ public class RecipeController : RecipeBookBaseController
     [ProducesResponseType(typeof(ErrorResponseJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(
         [FromServices] IDeleteRecipeUseCase useCase,
-        [FromRoute] [ModelBinder(typeof(IdBinder))] long id)
+        [FromRoute] [ModelBinder(typeof(IdBinder))]
+        long id)
     {
         await useCase.Execute(id);
 
@@ -75,11 +78,29 @@ public class RecipeController : RecipeBookBaseController
     [ProducesResponseType(typeof(ErrorResponseJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Update(
         [FromServices] IUpdateRecipeUseCase useCase,
-        [FromRoute] [ModelBinder(typeof(IdBinder))] long id,
+        [FromRoute] [ModelBinder(typeof(IdBinder))]
+        long id,
         [FromBody] RecipeRequestJson request)
     {
         await useCase.Execute(id, request);
 
         return NoContent();
+    }
+
+    [HttpPost("generate")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Generate(
+        [FromServices] IGenerateRecipeUseCase useCase,
+        [FromBody] GenerateRecipeRequestJson request)
+    {
+        /*
+         * There are no integration tests for this class since
+         * it would cost OpenAI tokens to run.
+         */
+        
+        var response = await useCase.Execute(request);
+
+        return Ok(response);
     }
 }
