@@ -222,6 +222,15 @@ namespace RecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only PNG, JPEG or JPG files are valid..
+        /// </summary>
+        public static string ONLY_IMAGES_ACCEPTED {
+            get {
+                return ResourceManager.GetString("ONLY_IMAGES_ACCEPTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This password is not valid..
         /// </summary>
         public static string PASSWORD_INVALID {

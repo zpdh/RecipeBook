@@ -189,4 +189,7 @@
   <data name="INGREDIENT_NOT_FOLLOWING_PATTERN" xml:space="preserve">
     <value>Este ingrediente possui caracteres invalidos ou muitos espaços em branco.</value>
   </data>
+  <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
+    <value>Somente arquivos PNG, JPEG ou JPG são válidos.</value>
+  </data>
 </root>

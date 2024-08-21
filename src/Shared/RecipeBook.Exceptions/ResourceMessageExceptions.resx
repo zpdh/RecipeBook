@@ -189,4 +189,7 @@
   <data name="INGREDIENT_NOT_FOLLOWING_PATTERN" xml:space="preserve">
     <value>This ingredient contains unallowed characters or too many whitespaces.</value>
   </data>
+  <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
+    <value>Only PNG, JPEG or JPG files are valid.</value>
+  </data>
 </root>

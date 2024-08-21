@@ -6,4 +6,28 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Update="Services\OpenAI\ResourceOpenAI.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ResourceOpenAI.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Services\OpenAI\ResourceOpenAI.pt.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ResourceOpenAI.pt.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Services\OpenAI\ResourceOpenAI.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ResourceOpenAI.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Services\OpenAI\ResourceOpenAI.pt.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ResourceOpenAI.pt.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
