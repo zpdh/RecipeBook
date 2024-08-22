@@ -21,7 +21,7 @@ public class RecipeController : RecipeBookBaseController
     [ProducesResponseType(typeof(ErrorResponseJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterRecipeUseCase useCase,
-        [FromBody] RecipeRequestJson request)
+        [FromForm] RegisterRecipeFormDataRequest request)
     {
         var response = await useCase.Execute(request);
 
