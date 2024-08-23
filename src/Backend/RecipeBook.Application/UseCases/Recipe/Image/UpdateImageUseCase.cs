@@ -38,7 +38,7 @@ public class UpdateImageUseCase : IUpdateImageUseCase
 
         if (recipe is null)
         {
-            throw new NotFoundException("Recipe not found");
+            throw new NotFoundException(ResourceMessageExceptions.RECIPE_NOT_FOUND);
         }
 
         var fileStream = file.OpenReadStream();
