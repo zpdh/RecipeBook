@@ -151,7 +151,7 @@ public class RecipeBookClassFixture : IClassFixture<CustomWebApplicationFactory>
 
                 content.Add(
                     new StringContent(value!.ToString()!),
-                    // Format: objProperty[positionInList][property]
+                    // Format: class[positionInList][property]
                     $"{propertyName}[{index}][{property.Name}]");
             }
 
