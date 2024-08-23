@@ -12,12 +12,12 @@ public class RecipeBuilder
         var list = new List<Recipe>();
 
         if (count is 0) count = 1;
-        
+
         for (var i = 0; i < count; i++)
         {
             var fakeRecipe = Build(user);
 
-            fakeRecipe.Id = i+1;
+            fakeRecipe.Id = i + 1;
 
             list.Add(fakeRecipe);
         }
@@ -32,6 +32,7 @@ public class RecipeBuilder
             .RuleFor(r => r.Title, faker => faker.Random.Word())
             .RuleFor(r => r.Difficulty, faker => faker.PickRandom<Difficulty>())
             .RuleFor(r => r.CookingTime, faker => faker.PickRandom<CookingTime>())
+            .RuleFor(r => r.ImageIdentifier, _ => $"{Guid.NewGuid()}.png")
             .RuleFor(r => r.Ingredients, faker => faker.Make(1, () => new Ingredient
             {
                 Id = 1,
