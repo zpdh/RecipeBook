@@ -1,7 +1,7 @@
+using System.Collections;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using Microsoft.AspNetCore.Http;
-using RecipeBook.Communication.Requests;
+using System.Reflection;
 
 namespace Api.Test;
 
@@ -24,6 +24,42 @@ public class RecipeBookClassFixture : IClassFixture<CustomWebApplicationFactory>
         AuthorizeRequest(token);
 
         return await _httpClient.PostAsJsonAsync(endpoint, request);
+    }
+
+    protected async Task<HttpResponseMessage> PostAsFormData(
+        string endpoint,
+        object request,
+        string token = "",
+        string culture = "en")
+    {
+        ChangeCulture(culture);
+        AuthorizeRequest(token);
+
+        var formData = new MultipartFormDataContent();
+
+        var requestProperties = request.GetType().GetProperties().ToList();
+
+        // Form data works similarly to a dictionary,
+        // therefore it's needed to get all properties
+        // and add them in a (key = value) pair.
+        foreach (var property in requestProperties)
+        {
+            var propertyValue = property.GetValue(request);
+
+            if (string.IsNullOrWhiteSpace(propertyValue?.ToString())) continue;
+
+            if (propertyValue is IList list)
+            {
+                AddListToFormData(formData, property.Name, list);
+                continue;
+            }
+
+            formData.Add(
+                new StringContent(propertyValue.ToString()!),
+                property.Name);
+        }
+
+        return await _httpClient.PostAsync(endpoint, formData);
     }
 
     protected async Task<HttpResponseMessage> Get(
@@ -75,5 +111,51 @@ public class RecipeBookClassFixture : IClassFixture<CustomWebApplicationFactory>
         if (string.IsNullOrWhiteSpace(token)) return;
 
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+    }
+
+    private static void AddListToFormData(
+        MultipartFormDataContent content,
+        string propertyName,
+        IList list)
+    {
+        var itemType = list.GetType().GetGenericArguments().Single();
+
+        if (itemType.IsClass && itemType != typeof(string)) // String is a class so this check is necessary
+        {
+            AddClassListToFormData(content, propertyName, list);
+            return;
+        }
+
+        foreach (var item in list)
+        {
+            content.Add(
+                new StringContent(item.ToString()!),
+                propertyName);
+        }
+    }
+
+    private static void AddClassListToFormData(
+        MultipartFormDataContent content,
+        string propertyName,
+        IList list)
+    {
+        var index = 0;
+
+        foreach (var item in list)
+        {
+            var classProperties = item.GetType().GetProperties().ToList();
+
+            foreach (var property in classProperties)
+            {
+                var value = property.GetValue(item, null);
+
+                content.Add(
+                    new StringContent(value!.ToString()!),
+                    // Format: objProperty[positionInList][property]
+                    $"{propertyName}[{index}][{property.Name}]");
+            }
+
+            index++;
+        }
     }
 }

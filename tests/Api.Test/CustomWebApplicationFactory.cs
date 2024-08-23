@@ -1,8 +1,10 @@
+using CommonTestUtils.Blob;
 using CommonTestUtils.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RecipeBook.Domain.Services.Storage;
 using RecipeBook.Infrastructure.DataAccess;
 
 namespace Api.Test;
@@ -26,6 +28,12 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
             }
 
             var provider = services.AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
+
+            var blobStorage = new BlobStorageServiceBuilder().Build();
+
+            // Adding a blob storage mock to provide an 
+            // instance for the integration tests
+            services.AddScoped<IBlobStorageService>(_ => blobStorage);
 
             services.AddDbContext<RecipeBookDbContext>(options =>
             {

@@ -138,8 +138,13 @@ public static class DependencyInjectionExtension
     {
         var connectionString = configuration.GetValue<string>("Settings:BlobStorage:Azure");
 
-        serviceCollection.AddScoped<IBlobStorageService>(_ =>
-            new AzureStorageService(
-                new BlobServiceClient(connectionString)));
+        // Checking if empty in order for tests to not
+        // throw exceptions  the connection string
+        if (connectionString.IsNotEmpty())
+        {
+            serviceCollection.AddScoped<IBlobStorageService>(_ =>
+                new AzureStorageService(
+                    new BlobServiceClient(connectionString)));
+        }
     }
 }
