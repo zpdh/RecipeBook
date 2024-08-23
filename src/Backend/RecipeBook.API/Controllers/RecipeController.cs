@@ -5,6 +5,7 @@ using RecipeBook.Application.UseCases.Recipe.Delete;
 using RecipeBook.Application.UseCases.Recipe.Filter;
 using RecipeBook.Application.UseCases.Recipe.Generate;
 using RecipeBook.Application.UseCases.Recipe.GetById;
+using RecipeBook.Application.UseCases.Recipe.Image;
 using RecipeBook.Application.UseCases.Recipe.Register;
 using RecipeBook.Application.UseCases.Recipe.Update;
 using RecipeBook.Communication.Requests;
@@ -20,7 +21,7 @@ public class RecipeController : RecipeBookBaseController
     [ProducesResponseType(typeof(ErrorResponseJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterRecipeUseCase useCase,
-        [FromBody] RecipeRequestJson request)
+        [FromForm] RegisterRecipeFormDataRequest request)
     {
         var response = await useCase.Execute(request);
 
@@ -98,9 +99,25 @@ public class RecipeController : RecipeBookBaseController
          * There are no integration tests for this class since
          * it would cost OpenAI tokens to run.
          */
-        
+
         var response = await useCase.Execute(request);
 
         return Ok(response);
+    }
+
+    [HttpPut]
+    [Route("image/{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ErrorResponseJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorResponseJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> UpdateImage(
+        [FromServices] IUpdateImageUseCase useCase,
+        [FromRoute] [ModelBinder(typeof(IdBinder))]
+        long id,
+        IFormFile file)
+    {
+        await useCase.Execute(id, file);
+
+        return NoContent();
     }
 }

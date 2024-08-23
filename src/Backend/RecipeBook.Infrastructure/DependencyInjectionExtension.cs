@@ -1,4 +1,5 @@
 using System.Reflection;
+using Azure.Storage.Blobs;
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ using RecipeBook.Domain.Security.Cryptography;
 using RecipeBook.Domain.Security.Tokens;
 using RecipeBook.Domain.Services.LoggedUser;
 using RecipeBook.Domain.Services.OpenAI;
+using RecipeBook.Domain.Services.Storage;
 using RecipeBook.Infrastructure.DataAccess;
 using RecipeBook.Infrastructure.DataAccess.Repositories;
 using RecipeBook.Infrastructure.Extensions;
@@ -21,6 +23,7 @@ using RecipeBook.Infrastructure.Security.Tokens.Generators;
 using RecipeBook.Infrastructure.Security.Tokens.Validators;
 using RecipeBook.Infrastructure.Services.LoggedUser;
 using RecipeBook.Infrastructure.Services.OpenAI;
+using RecipeBook.Infrastructure.Services.Storage;
 
 namespace RecipeBook.Infrastructure;
 
@@ -33,6 +36,7 @@ public static class DependencyInjectionExtension
         AddTokens(serviceCollection, configuration);
         AddPasswordEncrypter(serviceCollection, configuration);
         AddOpenAI(serviceCollection, configuration);
+        AddAzureStorage(serviceCollection, configuration);
 
         if (configuration.IsUnitTestEnviroment())
         {
@@ -128,5 +132,19 @@ public static class DependencyInjectionExtension
         var passKey = configuration.GetValue<string>("Settings:Password:PasswordKey")!;
 
         serviceCollection.AddScoped<IPasswordEncrypter>(options => new Sha512Encrypter(passKey));
+    }
+
+    private static void AddAzureStorage(IServiceCollection serviceCollection, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetValue<string>("Settings:BlobStorage:Azure");
+
+        // Checking if empty in order for tests to not
+        // throw exceptions  the connection string
+        if (connectionString.IsNotEmpty())
+        {
+            serviceCollection.AddScoped<IBlobStorageService>(_ =>
+                new AzureStorageService(
+                    new BlobServiceClient(connectionString)));
+        }
     }
 }

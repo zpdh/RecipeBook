@@ -17,4 +17,16 @@
       <PackageReference Include="Moq" Version="4.20.70" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Files\image.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Files\image.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Files\notimage.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
