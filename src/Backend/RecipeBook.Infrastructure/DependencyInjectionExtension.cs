@@ -1,4 +1,5 @@
 using System.Reflection;
+using Azure.Messaging.ServiceBus;
 using Azure.Storage.Blobs;
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using RecipeBook.Domain.Security.Cryptography;
 using RecipeBook.Domain.Security.Tokens;
 using RecipeBook.Domain.Services.LoggedUser;
 using RecipeBook.Domain.Services.OpenAI;
+using RecipeBook.Domain.Services.ServiceBus;
 using RecipeBook.Domain.Services.Storage;
 using RecipeBook.Infrastructure.DataAccess;
 using RecipeBook.Infrastructure.DataAccess.Repositories;
@@ -23,6 +25,7 @@ using RecipeBook.Infrastructure.Security.Tokens.Generators;
 using RecipeBook.Infrastructure.Security.Tokens.Validators;
 using RecipeBook.Infrastructure.Services.LoggedUser;
 using RecipeBook.Infrastructure.Services.OpenAI;
+using RecipeBook.Infrastructure.Services.ServiceBus;
 using RecipeBook.Infrastructure.Services.Storage;
 
 namespace RecipeBook.Infrastructure;
@@ -37,6 +40,7 @@ public static class DependencyInjectionExtension
         AddPasswordEncrypter(serviceCollection, configuration);
         AddOpenAI(serviceCollection, configuration);
         AddAzureStorage(serviceCollection, configuration);
+        AddQueue(serviceCollection, configuration);
 
         if (configuration.IsUnitTestEnviroment())
         {
@@ -64,6 +68,7 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         serviceCollection.AddScoped<IUserReadOnlyRepository, UserRepository>();
         serviceCollection.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+        serviceCollection.AddScoped<IUserDeleteOnlyRepository, UserRepository>();
 
         serviceCollection.AddScoped<IRecipeWriteOnlyRepository, RecipeRepository>();
         serviceCollection.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
@@ -146,5 +151,33 @@ public static class DependencyInjectionExtension
                 new AzureStorageService(
                     new BlobServiceClient(connectionString)));
         }
+    }
+
+    private static void AddQueue(IServiceCollection serviceCollection, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetValue<string>("Settings:ServiceBus:DeleteAccount");
+        const string queueName = "user";
+
+        if (string.IsNullOrWhiteSpace(connectionString)) return;
+
+
+        var client = new ServiceBusClient(
+            connectionString,
+            new ServiceBusClientOptions
+            {
+                TransportType = ServiceBusTransportType.AmqpWebSockets
+            });
+
+        var queue = new DeleteUserQueue(client.CreateSender(queueName));
+        var processor = new DeleteUserProcessor(
+            client.CreateProcessor(
+                queueName,
+                new ServiceBusProcessorOptions
+                {
+                    MaxConcurrentCalls = 1
+                }));
+
+        serviceCollection.AddSingleton(processor);
+        serviceCollection.AddScoped<IDeleteUserQueue>(_ => queue);
     }
 }

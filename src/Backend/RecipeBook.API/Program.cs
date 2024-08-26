@@ -1,9 +1,11 @@
 using Microsoft.OpenApi.Models;
+using RecipeBook.API.BackgroundServices;
 using RecipeBook.API.Converters;
 using RecipeBook.API.Filters;
 using RecipeBook.API.Middleware;
 using RecipeBook.API.Token;
 using RecipeBook.Application;
+using RecipeBook.Domain.Extensions;
 using RecipeBook.Domain.Security.Tokens;
 using RecipeBook.Infrastructure;
 using RecipeBook.Infrastructure.Extensions;
@@ -20,7 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.OperationFilter<IdsFilter>();
-    
+
     const string bearer = "Bearer";
     options.AddSecurityDefinition(bearer, new OpenApiSecurityScheme
     {
@@ -58,6 +60,11 @@ builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddHttpContextAccessor();
+
+if (builder.Configuration.IsUnitTestEnviroment().IsFalse())
+{
+    builder.Services.AddHostedService<DeleteUserService>();
+}
 
 var app = builder.Build();
 

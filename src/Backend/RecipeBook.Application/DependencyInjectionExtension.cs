@@ -12,6 +12,8 @@ using RecipeBook.Application.UseCases.Recipe.Image;
 using RecipeBook.Application.UseCases.Recipe.Register;
 using RecipeBook.Application.UseCases.Recipe.Update;
 using RecipeBook.Application.UseCases.User.ChangePassword;
+using RecipeBook.Application.UseCases.User.Delete.Delete;
+using RecipeBook.Application.UseCases.User.Delete.Request;
 using RecipeBook.Application.UseCases.User.Profile;
 using RecipeBook.Application.UseCases.User.Registration;
 using RecipeBook.Application.UseCases.User.Update;
@@ -35,6 +37,9 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
         serviceCollection.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         serviceCollection.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
+        serviceCollection.AddScoped<IRequestDeleteUserUseCase, RequestDeleteUserUseCase>();
+        serviceCollection.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
+
         serviceCollection.AddScoped<IRegisterRecipeUseCase, RegisterRecipeUseCase>();
         serviceCollection.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
         serviceCollection.AddScoped<IGetRecipeByIdUseCase, GetRecipeByIdUseCase>();

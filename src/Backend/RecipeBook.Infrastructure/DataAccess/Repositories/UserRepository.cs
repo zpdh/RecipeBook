@@ -4,7 +4,11 @@ using RecipeBook.Domain.Repositories.User;
 
 namespace RecipeBook.Infrastructure.DataAccess.Repositories;
 
-public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository, IUserUpdateOnlyRepository
+public class UserRepository :
+    IUserReadOnlyRepository,
+    IUserWriteOnlyRepository,
+    IUserUpdateOnlyRepository,
+    IUserDeleteOnlyRepository
 {
     private readonly RecipeBookDbContext _context;
 
@@ -50,5 +54,19 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
     public void Update(User user)
     {
         _context.Users.Update(user);
+    }
+
+    public async Task Delete(Guid userIdentifier)
+    {
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.UserIdentifier == userIdentifier);
+
+        if (user is null) return;
+
+        var recipes = _context.Recipes
+            .Where(recipe => recipe.UserId == user.Id);
+
+        _context.Recipes.RemoveRange(recipes);
+        _context.Users.Remove(user);
     }
 }
