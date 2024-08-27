@@ -57,7 +57,7 @@ public class AzureStorageService : IBlobStorageService
 
         return blobClient.GenerateSasUri(sasBuilder).ToString();
     }
-    
+
     public async Task Delete(User user, string fileName)
     {
         var containerClient = _blobServiceClient.GetBlobContainerClient(user.UserIdentifier.ToString());
@@ -66,5 +66,11 @@ public class AzureStorageService : IBlobStorageService
         if (exists.Value.IsFalse()) return;
 
         await containerClient.DeleteBlobIfExistsAsync(fileName);
+    }
+
+    public async Task DeleteContainer(Guid userIdentifier)
+    {
+        var containerClient = _blobServiceClient.GetBlobContainerClient(userIdentifier.ToString());
+        await containerClient.DeleteIfExistsAsync();
     }
 }
