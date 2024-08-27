@@ -124,7 +124,7 @@ public static class DependencyInjectionExtension
 
     private static void AddOpenAI(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IGenerateRecipeAI, ChatGPTService>();
+        services.AddScoped<IGenerateRecipeAI, ChatGptService>();
 
         var key = configuration.GetValue<string>("Settings:OpenAI:ApiKey");
         var authentication = new APIAuthentication(key);

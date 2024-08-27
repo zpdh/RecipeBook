@@ -15,8 +15,6 @@ public class DeleteUserService : BackgroundService
         _processor = processor.Processor;
     }
 
-    ~DeleteUserService() => Dispose();
-
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _processor.ProcessMessageAsync += ProcessMessageAsync;
@@ -53,4 +51,6 @@ public class DeleteUserService : BackgroundService
 
         GC.SuppressFinalize(this);
     }
+
+    ~DeleteUserService() => Dispose();
 }
