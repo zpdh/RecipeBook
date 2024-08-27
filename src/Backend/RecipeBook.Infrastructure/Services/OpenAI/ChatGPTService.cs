@@ -1,4 +1,5 @@
 using OpenAI_API;
+using OpenAI_API.Chat;
 using RecipeBook.Domain.DTOs;
 using RecipeBook.Domain.Enums;
 using RecipeBook.Domain.Extensions;
@@ -6,7 +7,7 @@ using RecipeBook.Domain.Services.OpenAI;
 
 namespace RecipeBook.Infrastructure.Services.OpenAI;
 
-public class ChatGPTService : IGenerateRecipeAI
+public class ChatGptService : IGenerateRecipeAI
 {
     /*
      * Disclaimer: I do not have any OpenAI tokens.
@@ -17,14 +18,14 @@ public class ChatGPTService : IGenerateRecipeAI
     private const string ChatModel = "gpt-4o";
     private readonly IOpenAIAPI _openAIAPI;
 
-    public ChatGPTService(IOpenAIAPI openAIAPI)
+    public ChatGptService(IOpenAIAPI openAIAPI)
     {
         _openAIAPI = openAIAPI;
     }
 
     public async Task<GeneratedRecipeDto> Generate(IList<string> ingredients)
     {
-        var conversation = _openAIAPI.Chat.CreateConversation( /*new ChatRequest { Model = ChatModel }*/);
+        var conversation = _openAIAPI.Chat.CreateConversation( new ChatRequest { Model = ChatModel });
 
         conversation.AppendSystemMessage(ResourceOpenAI.STARTING_MESSAGE);
 
