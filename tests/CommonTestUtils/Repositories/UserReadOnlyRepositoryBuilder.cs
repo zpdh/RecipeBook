@@ -24,10 +24,10 @@ public class UserReadOnlyRepositoryBuilder
             .ReturnsAsync(true);
     }
 
-    public void GetByEmailAndPassword(User user)
+    public void GetByEmail(User user)
     {
         _repository
-            .Setup(repository => repository.GetByEmailAndPassword(user.Email, user.Password))
+            .Setup(repository => repository.GetByEmail(user.Email))
             .ReturnsAsync(user);
     }
 }
