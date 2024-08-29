@@ -4,6 +4,7 @@ using RecipeBook.Application.Services.AutoMapper;
 using RecipeBook.Application.UseCases.Dashboard.Get;
 using RecipeBook.Application.UseCases.Login;
 using RecipeBook.Application.UseCases.Login.ExecuteLogin;
+using RecipeBook.Application.UseCases.Login.ExternalLogin;
 using RecipeBook.Application.UseCases.Recipe.Delete;
 using RecipeBook.Application.UseCases.Recipe.Filter;
 using RecipeBook.Application.UseCases.Recipe.Generate;
@@ -34,6 +35,7 @@ public static class DependencyInjectionExtension
     {
         serviceCollection.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         serviceCollection.AddScoped<IExecuteLoginUseCase, ExecuteLoginUseCase>();
+        serviceCollection.AddScoped<IExternalLoginUseCase, ExternalLoginUseCase>();
         serviceCollection.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
         serviceCollection.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
         serviceCollection.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
