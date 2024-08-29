@@ -1,5 +1,6 @@
 using RecipeBook.Communication.Requests;
 using RecipeBook.Communication.Responses;
+using RecipeBook.Domain.Extensions;
 using RecipeBook.Domain.Repositories.User;
 using RecipeBook.Domain.Security.Cryptography;
 using RecipeBook.Domain.Security.Tokens;
@@ -32,10 +33,14 @@ public class ExecuteLoginUseCase : IExecuteLoginUseCase
          * that way it would result in a performance increase.
          */
 
-        var encryptedPassword = _encrypter.Encrypt(request.Password);
+        var user = await _readOnlyRepository.GetByEmail(request.Email);
 
-        var user = await _readOnlyRepository.GetByEmailAndPassword(request.Email, encryptedPassword)
-                   ?? throw new InvalidLoginException();
+        // Checks if user exists and if given password
+        // is equal to password in database.
+        if (user is null || _encrypter.IsValid(request.Password, user.Password).IsFalse())
+        {
+            throw new InvalidLoginException();
+        }
 
         return new RegisterUserResponseJson
         {

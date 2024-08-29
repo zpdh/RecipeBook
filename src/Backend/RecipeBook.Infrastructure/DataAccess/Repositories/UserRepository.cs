@@ -33,16 +33,6 @@ public class UserRepository :
             .AnyAsync(u => u.UserIdentifier.Equals(userIdentifier) && u.IsActive);
     }
 
-    public async Task<User?> GetByEmailAndPassword(string email, string password)
-    {
-        var user = await _context
-            .Users
-            .AsNoTracking()
-            .FirstOrDefaultAsync(u => u.Email.Equals(email) && u.Password.Equals(password));
-
-        return user;
-    }
-
     public async Task<User?> GetByEmail(string email)
     {
         return await _context.Users

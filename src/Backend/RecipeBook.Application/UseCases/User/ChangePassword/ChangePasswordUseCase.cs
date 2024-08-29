@@ -48,9 +48,7 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
     {
         var result = new ChangePasswordValidator().Validate(request);
 
-        var passEncrypted = _encrypter.Encrypt(request.Password);
-
-        if (passEncrypted != user.Password)
+        if (_encrypter.IsValid(request.Password, user.Password).IsFalse())
         {
             result.Errors.Add(new FluentValidation.Results.ValidationFailure(
                 string.Empty,
@@ -58,9 +56,9 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         }
 
         if (result.IsValid) return;
-        
+
         var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
-            
+
         throw new ErrorOnValidationException(errorMessages);
     }
 }

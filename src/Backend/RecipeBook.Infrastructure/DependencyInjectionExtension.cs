@@ -37,7 +37,7 @@ public static class DependencyInjectionExtension
         AddRepositories(serviceCollection);
         AddLoggedUser(serviceCollection);
         AddTokens(serviceCollection, configuration);
-        AddPasswordEncrypter(serviceCollection, configuration);
+        AddPasswordEncrypter(serviceCollection);
         AddOpenAI(serviceCollection, configuration);
         AddAzureStorage(serviceCollection, configuration);
         AddQueue(serviceCollection, configuration);
@@ -132,11 +132,9 @@ public static class DependencyInjectionExtension
         services.AddScoped<IOpenAIAPI>(option => new OpenAIAPI(authentication));
     }
 
-    private static void AddPasswordEncrypter(IServiceCollection serviceCollection, IConfiguration configuration)
+    private static void AddPasswordEncrypter(IServiceCollection serviceCollection)
     {
-        var passKey = configuration.GetValue<string>("Settings:Password:PasswordKey")!;
-
-        serviceCollection.AddScoped<IPasswordEncrypter>(options => new Sha512Encrypter(passKey));
+        serviceCollection.AddScoped<IPasswordEncrypter, BCryptHasher>();
     }
 
     private static void AddAzureStorage(IServiceCollection serviceCollection, IConfiguration configuration)

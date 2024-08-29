@@ -54,7 +54,7 @@ public class ExecuteLoginUseCaseTest
 
         if (user is not null)
         {
-            readRepoBuilder.GetByEmailAndPassword(user);
+            readRepoBuilder.GetByEmail(user);
         }
 
         return new ExecuteLoginUseCase(readRepoBuilder.Build(), PasswordEncrypterBuilder.Build(), tokenGenerator);
