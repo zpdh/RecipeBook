@@ -43,12 +43,17 @@ public class UserRepository :
         return user;
     }
 
+    public async Task<User?> GetByEmail(string email)
+    {
+        return await _context.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Email == email);
+    }
+
     public async Task<User> GetById(long id)
     {
-        var user = await _context.Users
+        return await _context.Users
             .FirstAsync(u => u.Id == id);
-
-        return user;
     }
 
     public void Update(User user)
