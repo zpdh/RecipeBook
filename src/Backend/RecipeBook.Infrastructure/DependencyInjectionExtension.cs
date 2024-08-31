@@ -73,6 +73,8 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IRecipeWriteOnlyRepository, RecipeRepository>();
         serviceCollection.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
         serviceCollection.AddScoped<IRecipeUpdateOnlyRepository, RecipeRepository>();
+
+        serviceCollection.AddScoped<ITokenRepository, TokenRepository>();
     }
 
     private static void AddDbContextSqlServer(IServiceCollection serviceCollection, IConfiguration configuration)
@@ -115,6 +117,8 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IAccessTokenGenerator>(_ =>
             new JwtTokenGenerator(expirationInMinutes, signingKey!));
         serviceCollection.AddScoped<IAccessTokenValidator>(_ => new JwtTokenValidator(signingKey!));
+
+        serviceCollection.AddScoped<IRefreshTokenGenerator>(_ => new RefreshTokenGenerator());
     }
 
     private static void AddLoggedUser(IServiceCollection serviceCollection)

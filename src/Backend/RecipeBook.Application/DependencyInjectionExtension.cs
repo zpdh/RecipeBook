@@ -12,6 +12,7 @@ using RecipeBook.Application.UseCases.Recipe.GetById;
 using RecipeBook.Application.UseCases.Recipe.Image;
 using RecipeBook.Application.UseCases.Recipe.Register;
 using RecipeBook.Application.UseCases.Recipe.Update;
+using RecipeBook.Application.UseCases.RefreshToken;
 using RecipeBook.Application.UseCases.User.ChangePassword;
 using RecipeBook.Application.UseCases.User.Delete.Delete;
 using RecipeBook.Application.UseCases.User.Delete.Request;
@@ -53,6 +54,8 @@ public static class DependencyInjectionExtension
         serviceCollection.AddScoped<IGenerateRecipeUseCase, GenerateRecipeUseCase>();
 
         serviceCollection.AddScoped<IUpdateImageUseCase, UpdateImageUseCase>();
+
+        serviceCollection.AddScoped<IRefreshTokenUseCase, RefreshTokenUseCase>();
     }
 
     private static void AddAutoMapper(IServiceCollection serviceCollection)

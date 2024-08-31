@@ -8,6 +8,7 @@ using RecipeBook.Application.UseCases.Login.ExecuteLogin;
 using RecipeBook.Communication.Requests;
 using RecipeBook.Exceptions;
 using RecipeBook.Exceptions.ExceptionsBase;
+using RecipeBook.Infrastructure.Security.Tokens.Generators;
 
 namespace UseCases.Tests.Login.ExecuteLogin;
 
@@ -51,12 +52,22 @@ public class ExecuteLoginUseCaseTest
     {
         var readRepoBuilder = new UserReadOnlyRepositoryBuilder();
         var tokenGenerator = JwtTokenGeneratorBuilder.Build();
+        var unitOfWork = UnitOfWorkBuilder.Build();
+        var tokenRepo = new TokenRepositoryBuilder().Build();
+        var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
+
 
         if (user is not null)
         {
             readRepoBuilder.GetByEmail(user);
         }
 
-        return new ExecuteLoginUseCase(readRepoBuilder.Build(), PasswordEncrypterBuilder.Build(), tokenGenerator);
+        return new ExecuteLoginUseCase(
+            readRepoBuilder.Build(),
+            PasswordEncrypterBuilder.Build(),
+            tokenGenerator,
+            refreshTokenGenerator,
+            tokenRepo,
+            unitOfWork);
     }
 }
