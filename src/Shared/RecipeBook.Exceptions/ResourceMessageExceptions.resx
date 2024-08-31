@@ -192,4 +192,10 @@
   <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
     <value>Only PNG, JPEG or JPG files are valid.</value>
   </data>
+  <data name="REFRESH_TOKEN_NOT_FOUND" xml:space="preserve">
+    <value>No refresh token was found.</value>
+  </data>
+  <data name="REFRESH_TOKEN_EXPIRED" xml:space="preserve">
+    <value>This refresh token has expired.</value>
+  </data>
 </root>

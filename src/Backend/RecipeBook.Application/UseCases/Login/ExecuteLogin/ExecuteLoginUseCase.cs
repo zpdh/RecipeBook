@@ -1,6 +1,7 @@
 using RecipeBook.Communication.Requests;
 using RecipeBook.Communication.Responses;
 using RecipeBook.Domain.Extensions;
+using RecipeBook.Domain.Repositories;
 using RecipeBook.Domain.Repositories.User;
 using RecipeBook.Domain.Security.Cryptography;
 using RecipeBook.Domain.Security.Tokens;
@@ -11,17 +12,26 @@ namespace RecipeBook.Application.UseCases.Login.ExecuteLogin;
 public class ExecuteLoginUseCase : IExecuteLoginUseCase
 {
     private readonly IUserReadOnlyRepository _readOnlyRepository;
+    private readonly ITokenRepository _tokenRepository;
     private readonly IPasswordEncrypter _encrypter;
     private readonly IAccessTokenGenerator _tokenGenerator;
+    private readonly IRefreshTokenGenerator _refreshTokenGenerator;
+    private readonly IUnitOfWork _unitOfWork;
 
     public ExecuteLoginUseCase(
         IUserReadOnlyRepository readOnlyRepository,
         IPasswordEncrypter encrypter,
-        IAccessTokenGenerator tokenGenerator)
+        IAccessTokenGenerator tokenGenerator,
+        IRefreshTokenGenerator refreshTokenGenerator,
+        ITokenRepository tokenRepository,
+        IUnitOfWork unitOfWork)
     {
         _readOnlyRepository = readOnlyRepository;
         _encrypter = encrypter;
         _tokenGenerator = tokenGenerator;
+        _refreshTokenGenerator = refreshTokenGenerator;
+        _tokenRepository = tokenRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<RegisterUserResponseJson> Execute(LoginRequestJson request)
@@ -42,13 +52,30 @@ public class ExecuteLoginUseCase : IExecuteLoginUseCase
             throw new InvalidLoginException();
         }
 
+        var refreshToken = await CreateRefreshToken(user);
+
         return new RegisterUserResponseJson
         {
             Name = user.Name,
-            Tokens = new ResponseTokenJson
+            Tokens = new TokensResponseJson
             {
-                AccessToken = _tokenGenerator.Generate(user.UserIdentifier)
+                AccessToken = _tokenGenerator.Generate(user.UserIdentifier),
+                RefreshToken = refreshToken
             }
         };
+    }
+
+    private async Task<string> CreateRefreshToken(Domain.Entities.User user)
+    {
+        var refreshToken = new Domain.Entities.RefreshToken
+        {
+            Value = _refreshTokenGenerator.Generate(),
+            UserId = user.Id
+        };
+
+        await _tokenRepository.SaveRefreshToken(refreshToken);
+        await _unitOfWork.Commit();
+
+        return refreshToken.Value;
     }
 }

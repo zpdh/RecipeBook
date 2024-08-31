@@ -1,5 +1,6 @@
 using AutoMapper;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authentication.BearerToken;
 using RecipeBook.Communication.Requests;
 using RecipeBook.Communication.Responses;
 using RecipeBook.Domain.Extensions;
@@ -16,10 +17,12 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 {
     private readonly IUserWriteOnlyRepository _writeOnlyRepository;
     private readonly IUserReadOnlyRepository _readOnlyRepository;
+    private readonly ITokenRepository _tokenRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly IPasswordEncrypter _encrypter;
     private readonly IAccessTokenGenerator _tokenGenerator;
+    private readonly IRefreshTokenGenerator _refreshTokenGenerator;
 
     public RegisterUserUseCase(
         IUserWriteOnlyRepository writeOnlyRepository,
@@ -27,13 +30,17 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         IMapper mapper,
         IUnitOfWork unitOfWork,
         IPasswordEncrypter encrypter,
-        IAccessTokenGenerator tokenGenerator)
+        IAccessTokenGenerator tokenGenerator,
+        IRefreshTokenGenerator refreshTokenGenerator,
+        ITokenRepository tokenRepository)
     {
         _writeOnlyRepository = writeOnlyRepository;
         _readOnlyRepository = readOnlyRepository;
         _mapper = mapper;
         _encrypter = encrypter;
         _tokenGenerator = tokenGenerator;
+        _refreshTokenGenerator = refreshTokenGenerator;
+        _tokenRepository = tokenRepository;
         _unitOfWork = unitOfWork;
     }
 
@@ -48,12 +55,15 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         await _writeOnlyRepository.Add(user);
         await _unitOfWork.Commit();
 
+        var refreshToken = await CreateRefreshToken(user);
+
         return new RegisterUserResponseJson
         {
             Name = user.Name,
-            Tokens = new ResponseTokenJson
+            Tokens = new TokensResponseJson
             {
-                AccessToken = _tokenGenerator.Generate(user.UserIdentifier)
+                AccessToken = _tokenGenerator.Generate(user.UserIdentifier),
+                RefreshToken = refreshToken
             }
         };
     }
@@ -76,5 +86,19 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
             throw new ErrorOnValidationException(errorMessages);
         }
+    }
+
+    private async Task<string> CreateRefreshToken(Domain.Entities.User user)
+    {
+        var refreshToken = new Domain.Entities.RefreshToken
+        {
+            Value = _refreshTokenGenerator.Generate(),
+            UserId = user.Id
+        };
+
+        await _tokenRepository.SaveRefreshToken(refreshToken);
+        await _unitOfWork.Commit();
+
+        return refreshToken.Value;
     }
 }

@@ -267,6 +267,24 @@ namespace RecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This refresh token has expired..
+        /// </summary>
+        public static string REFRESH_TOKEN_EXPIRED {
+            get {
+                return ResourceManager.GetString("REFRESH_TOKEN_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No refresh token was found..
+        /// </summary>
+        public static string REFRESH_TOKEN_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("REFRESH_TOKEN_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An unknown error occurred..
         /// </summary>
         public static string UNKNOWN_ERROR {
