@@ -1,12 +1,12 @@
 ## Introduction
 
-This is a Recipe Book API, a robust backend service built using Domain-Driven Design (DDD) principles, offering a
+This is Recipe Book, a robust API service built using Domain-Driven Design (DDD) principles, offering a
 variety of features to manage and explore culinary recipes.
 It includes user registration, JWT authentication, external login via Google, CRUD recipe operations with image upload,
 along filtering and search functionalities.
-The API integrates with ChatGPT for recipe creating as well as some Azure cloud services such as Blob storages for
+The API integrates with ChatGPT for recipe creation as well as some Azure cloud services such as Blob storages for
 images, Service Bus for messaging and more.
-It also includes unit and integration tests for most of the features, to assure reliability and quality to the product.
+It also includes unit and integration tests for most of the features, to assure quality and reliability to the product.
 
 
 ## Technologies
