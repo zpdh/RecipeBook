@@ -1,20 +1,48 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+## Introduction
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+This is a Recipe Book API, a robust backend service built using Domain-Driven Design (DDD) principles, offering a
+variety of features to manage and explore culinary recipes.
+It includes user registration, JWT authentication, external login via Google, CRUD recipe operations with image upload,
+along filtering and search functionalities.
+The API integrates with ChatGPT for recipe creating as well as some Azure cloud services such as Blob storages for
+images, Service Bus for messaging and more.
+It also includes unit and integration tests for most of the features, to assure reliability and quality to the product.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Technologies
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+Backend:
+
+- .NET 8.0
+- C# 12
+- MySQL
+- SQL Server
+- OpenAPI (Swagger)
+- Entity Framework
+- Dapper ORM
+- FluentMigrator
+- FluentValidation
+- AutoMapper
+- Sqids
+- BCrypt
+
+Tests:
+
+- xUnit
+- FluentAssertions
+- Bogus
+- Moq
+
+
+## How to run the app
+
+### Requirements
+
+- IDE of your choice
+- MySQL or SQL Server
+
+### Installation
+
+1. Clone the repository `git clone https://github.com/zpdh/RecipeBook.git`
+2. Fills all the fields in `appsettings.Development.json`
+3. Execute the API and enjoy!
